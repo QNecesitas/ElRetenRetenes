@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="@string/editar"
+        android:id="@+id/menu_option_reten_edit"
+        />
+    <item
+        android:title="@string/eliminar"
+        android:id="@+id/menu_option_reten_delete"
+        />
+    <item
+        android:title="@string/vender"
+        android:id="@+id/menu_option_reten_sales"
+        />
+    <item
+        android:title="@string/cantidad"
+        android:id="@+id/menu_option_reten_amount"
+        />
+
+
+</menu>
