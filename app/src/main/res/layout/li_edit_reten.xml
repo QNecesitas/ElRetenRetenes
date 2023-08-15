@@ -70,7 +70,8 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/c_digo"
                         android:inputType="text"
-                        android:maxLength="100" />
+                        android:maxLength="100"
+                        android:enabled="false"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -367,7 +368,7 @@
                     style="@style/transparent_button_outlined"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/aceptar" />
+                    android:text="@string/actualizar" />
 
             </com.google.android.material.button.MaterialButtonToggleGroup>
 

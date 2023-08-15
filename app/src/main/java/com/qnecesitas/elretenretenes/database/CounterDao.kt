@@ -16,4 +16,9 @@ interface CounterDao {
 
     @Query("SELECT * FROM Counter")
     fun fetchReten(): Flow<List<Counter>>
+    @Query("UPDATE Counter SET code=:code, location=:location, amount=:amount, buyPrice=:buyPrice, salePrice=:salePrice,descr=:descr,deficit =:deficit, size =:size, brand=:brand WHERE code=:code ")
+    suspend fun updateReten(code: String,location: String, amount: Int, buyPrice: Double, salePrice: Double, descr: String, deficit: Int, size: String, brand: String)
+
+    @Query("UPDATE Counter SET amount=:amount WHERE code=:code")
+    suspend fun updateAmount(code: String,amount: Int)
 }

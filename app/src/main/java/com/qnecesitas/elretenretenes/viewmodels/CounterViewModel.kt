@@ -22,7 +22,7 @@ class CounterViewModel(private val counterDao: CounterDao):ViewModel() {
         return counterDao.selectDuplicate(code).isNotEmpty()
     }
 
-    suspend fun addProduct(
+    suspend fun addReten(
         code: String ,
         location: String ,
         amount: Int ,
@@ -52,6 +52,42 @@ class CounterViewModel(private val counterDao: CounterDao):ViewModel() {
         counterDao.fetchReten().collect() {
             _listCounter.postValue(it as MutableList<Counter>?)
         }
+    }
+
+    suspend fun updateReten(
+        code: String ,
+        location: String ,
+        amount: Int ,
+        buyPrice: Double ,
+        salePrice: Double ,
+        descr: String ,
+        deficit: Int ,
+        size: String ,
+        brand: String
+    ) {
+        counterDao.updateReten(
+            code ,
+            location ,
+            amount ,
+            buyPrice ,
+            salePrice ,
+            descr ,
+            deficit ,
+            size ,
+            brand
+        )
+
+
+    }
+
+    suspend fun updateAmount(
+        code: String,
+        amount: Int
+    ){
+        counterDao.updateAmount(
+            code,
+            amount
+        )
     }
 }
 

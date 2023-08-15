@@ -17,6 +17,10 @@
         android:title="@string/cantidad"
         android:id="@+id/menu_option_reten_amount"
         />
+    <item
+        android:title="@string/localizacion"
+        android:id="@+id/menu_option_reten_location"
+        />
 
 
 </menu>
