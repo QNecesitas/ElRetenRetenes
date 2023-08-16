@@ -45,6 +45,7 @@ class FragmentCounter : Fragment() {
     private val viewModel: CounterViewModel by viewModels{
         CounterViewModelFactory((activity?.application as ElRetenRetenes).database.counterDao())
     }
+    var section="Mostrador"
 
     override fun onCreateView(
         inflater: LayoutInflater ,
@@ -65,8 +66,11 @@ class FragmentCounter : Fragment() {
 
 
 
-
+        //Observe
         viewModel.listCounter.observe(requireActivity()) {
+            adapterCounter.submitList(it)
+        }
+        viewModel.listCounterFilter.observe(requireActivity()) {
             adapterCounter.submitList(it)
         }
 
@@ -80,6 +84,26 @@ class FragmentCounter : Fragment() {
         adapterCounter.setClickAmount(object :CounterAdapter.ITouchAmount{
             override fun onClickAmount(counter: Counter) {
                 liEditAmount(counter)
+            }
+
+        })
+
+        adapterCounter.setClickLocation(object :CounterAdapter.ITouchLocation{
+            override fun onClickLocation(counter: Counter) {
+                getLocation(counter)
+            }
+
+        })
+        adapterCounter.setClickDelete(object :CounterAdapter.ITouchDelete{
+            override fun onClickDelete(counter: Counter) {
+                deleteReten(counter)
+            }
+
+        })
+
+        adapterCounter.setClickEntry(object :CounterAdapter.ITouchEntry{
+            override fun onClickEntry(counter: Counter) {
+                entryAmount(counter)
             }
 
         })
@@ -441,6 +465,119 @@ class FragmentCounter : Fragment() {
             if (li_amount_binding!!.et.text.toString().isNotBlank()) {
                 lifecycleScope.launch{
                     viewModel.updateAmount(counter.code, li_amount_binding!!.et.text.toString().toInt())
+                    FancyToast.makeText(
+                        requireContext(),
+                        getString(R.string.operacion_realizada_con_exito),
+                        FancyToast.LENGTH_LONG,
+                        FancyToast.SUCCESS,
+                        false
+                    ).show()
+                }
+
+            } else {
+                li_amount_binding!!.et.error = getString(R.string.este_campo_no_debe_vacio)
+            }
+        }
+
+        li_amount_binding!!.btnCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        //Finished
+        alertDialog.setCancelable(false)
+        alertDialog.window!!.setGravity(Gravity.CENTER)
+        alertDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        alertDialog.show()
+    }
+
+    fun getLocation(counter: Counter){
+        loadRecyclerInfoAll()
+
+        FancyToast.makeText(
+            requireContext(),
+            ("Localización: ${counter.location}.\nSección: $section."),
+            FancyToast.LENGTH_LONG,
+            FancyToast.SUCCESS,
+            false
+        ).show()
+
+    }
+    fun callFilterByText(text: String) {
+        viewModel.filterByText(text)
+    }
+    @OptIn(DelicateCoroutinesApi::class)
+    fun deleteReten(counter: Counter){
+        GlobalScope.launch(Dispatchers.IO){
+            viewModel.deleteReten(counter.code)
+        }
+        FancyToast.makeText(
+            requireContext(),
+            getString(R.string.operacion_realizada_con_exito),
+            FancyToast.LENGTH_LONG,
+            FancyToast.SUCCESS,
+            false
+        ).show()
+    }
+    fun entryAmount(counter: Counter){
+        val inflater = LayoutInflater.from(binding.root.context)
+        li_amount_binding = LiEditAmountBinding.inflate(inflater)
+        val builder = AlertDialog.Builder(binding.root.context)
+        builder.setView(li_amount_binding!!.root)
+        val alertDialog = builder.create()
+
+        //Filling and listeners
+        loadRecyclerInfoAll()
+        var currentAmount = 0
+        li_amount_binding!!.et.setText(currentAmount.toString())
+
+        li_amount_binding!!.ivBtnMore.setOnClickListener {
+            if (currentAmount != 99999) {
+                currentAmount++
+                li_amount_binding!!.et.setText(currentAmount.toString())
+            }
+        }
+
+        li_amount_binding!!.ivBtnLess.setOnClickListener {
+            if (currentAmount != 0) {
+                currentAmount--
+                li_amount_binding!!.et.setText(currentAmount.toString())
+            }
+        }
+
+        li_amount_binding!!.et.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+                if (li_amount_binding!!.et.text.toString() == "0") {
+                    currentAmount = 1
+                    li_amount_binding!!.et.setText(currentAmount.toString())
+                } else if (li_amount_binding!!.et.text.toString() == "") {
+                    currentAmount = 1
+                } else {
+                    currentAmount = li_amount_binding!!.et.text.toString().toInt()
+                }
+            }
+
+            override fun afterTextChanged(editable: Editable) {}
+            override fun beforeTextChanged(
+                charSequence: CharSequence,
+                i: Int,
+                i1: Int,
+                i2: Int
+            ) {
+            }
+        })
+
+        li_amount_binding!!.btnAccept.setOnClickListener {
+            alertDialog.dismiss()
+            if (li_amount_binding!!.et.text.toString().isNotBlank()) {
+                lifecycleScope.launch{
+                    viewModel.updateAmount(counter.code, li_amount_binding!!.et.text.toString().toInt() + counter.amount)
+                    FancyToast.makeText(
+                        requireContext(),
+                        getString(R.string.operacion_realizada_con_exito),
+                        FancyToast.LENGTH_LONG,
+                        FancyToast.SUCCESS,
+                        false
+                    ).show()
                 }
 
             } else {

@@ -22,6 +22,7 @@ class CounterAdapter(private val context: Context) :
     private var clickSales: ITouchSales? = null
     private var clickAmount: ITouchAmount? = null
     private var clickLocation: ITouchLocation? =null
+    private var clickEntry:ITouchEntry?=null
 
 
     class CounterViewHolder(private var binding: RecyclerCounterBinding) :
@@ -35,7 +36,8 @@ class CounterAdapter(private val context: Context) :
             clickDelete: ITouchDelete? ,
             clickSales: ITouchSales? ,
             clickAmount: ITouchAmount? ,
-            clickLocation: ITouchLocation?
+            clickLocation: ITouchLocation?,
+            clickEntry: ITouchEntry?
         ) {
 
             //Declare
@@ -71,6 +73,10 @@ class CounterAdapter(private val context: Context) :
                         R.id.menu_option_reten_location ->{
                             clickLocation?.onClickLocation(counter)
                         }
+
+                        R.id.menu_option_reten_entry ->{
+                            clickEntry?.onClickEntry(counter)
+                        }
                     }
                     false
                 }
@@ -98,7 +104,7 @@ class CounterAdapter(private val context: Context) :
     override fun onBindViewHolder(holder: CounterViewHolder, position: Int) {
         holder.bind(
             getItem(position), context,
-            clickEdit, clickDelete, clickSales, clickAmount,clickLocation
+            clickEdit, clickDelete, clickSales, clickAmount,clickLocation,clickEntry
         )
     }
 
@@ -154,6 +160,14 @@ class CounterAdapter(private val context: Context) :
 
     fun setClickLocation(clickLocation: ITouchLocation?) {
         this.clickLocation = clickLocation
+    }
+
+    interface ITouchEntry {
+        fun onClickEntry(counter: Counter)
+    }
+
+    fun setClickEntry(clickEntry: ITouchEntry?) {
+        this.clickEntry = clickEntry
     }
 
 

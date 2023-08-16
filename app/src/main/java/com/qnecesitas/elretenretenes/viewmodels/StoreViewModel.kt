@@ -4,23 +4,23 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.qnecesitas.elretenretenes.data.Counter
-import com.qnecesitas.elretenretenes.database.CounterDao
+import com.qnecesitas.elretenretenes.data.Store
+import com.qnecesitas.elretenretenes.database.StoreDao
 
 @Suppress("UNNECESSARY_NOT_NULL_ASSERTION")
-class CounterViewModel(private val counterDao: CounterDao):ViewModel() {
+class StoreViewModel(private val storeDao: StoreDao): ViewModel() {
 
     //List counter
-    private val _listCounter = MutableLiveData<MutableList<Counter>>()
-    val listCounter: LiveData<MutableList<Counter>> get() = _listCounter
+    private val _listStore = MutableLiveData<MutableList<Store>>()
+    val listStore: LiveData<MutableList<Store>> get() = _listStore
 
     //List driver
-    private val _listCounterFilter = MutableLiveData<MutableList<Counter>>()
-    val listCounterFilter: LiveData<MutableList<Counter>> get() = _listCounterFilter
+    private val _listStoreFilter = MutableLiveData<MutableList<Store>>()
+    val listStoreFilter: LiveData<MutableList<Store>> get() = _listStoreFilter
 
 
     suspend fun selectDuplicate(code: String): Boolean {
-        return counterDao.selectDuplicate(code).isNotEmpty()
+        return storeDao.selectDuplicate(code).isNotEmpty()
     }
 
     suspend fun addReten(
@@ -34,7 +34,7 @@ class CounterViewModel(private val counterDao: CounterDao):ViewModel() {
         size: String ,
         brand: String
     ) {
-        counterDao.insertReten(
+        storeDao.insertReten(
             code ,
             location ,
             amount ,
@@ -50,8 +50,8 @@ class CounterViewModel(private val counterDao: CounterDao):ViewModel() {
     }
 
     suspend fun getAllReten() {
-        counterDao.fetchReten().collect {
-            _listCounter.postValue(it as MutableList<Counter>?)
+        storeDao.fetchReten().collect {
+            _listStore.postValue(it as MutableList<Store>?)
         }
     }
 
@@ -66,7 +66,7 @@ class CounterViewModel(private val counterDao: CounterDao):ViewModel() {
         size: String ,
         brand: String
     ) {
-        counterDao.updateReten(
+        storeDao.updateReten(
             code ,
             location ,
             amount ,
@@ -85,7 +85,7 @@ class CounterViewModel(private val counterDao: CounterDao):ViewModel() {
         code: String,
         amount: Int
     ){
-        counterDao.updateAmount(
+        storeDao.updateAmount(
             code,
             amount
         )
@@ -93,38 +93,37 @@ class CounterViewModel(private val counterDao: CounterDao):ViewModel() {
 
     fun filterByText(text: String) {
         if (text.trim().isNotEmpty()) {
-            val filterList = _listCounter.value?.filter {
+            val filterList = _listStore.value?.filter {
                 it.size.contains(text, ignoreCase = true)
 
             }?.toMutableList()
 
             if (filterList != null) {
-                _listCounterFilter.postValue(filterList!!)
+                _listStoreFilter.postValue(filterList!!)
             }
 
         } else {
-            _listCounterFilter.postValue(listCounter.value)
+            _listStoreFilter.postValue(listStore.value)
         }
     }
 
     suspend fun deleteReten(
         code: String
     ){
-        counterDao.deleteReten(
+        storeDao.deleteReten(
             code
         )
     }
-
 }
 
-class CounterViewModelFactory(
-    private val counterDao: CounterDao
+class StoreViewModelFactory(
+    private val storeDao: StoreDao
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(CounterViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(StoreViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return CounterViewModel(counterDao) as T
+            return StoreViewModel(storeDao) as T
         }
         throw IllegalArgumentException("Unknown viewModel class")
     }

@@ -14,6 +14,5 @@ data class Counter(
     @ColumnInfo(name = "descr") var descr:String ,
     @ColumnInfo(name = "deficit") var deficit:Int ,
     @ColumnInfo(name = "size") var size:String ,
-    @ColumnInfo(name = "location") var location:String ,
-
+    @ColumnInfo(name = "location") var location:String
     )

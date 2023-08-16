@@ -21,4 +21,7 @@ interface CounterDao {
 
     @Query("UPDATE Counter SET amount=:amount WHERE code=:code")
     suspend fun updateAmount(code: String,amount: Int)
+
+    @Query("DELETE FROM Counter WHERE code=:code")
+    suspend fun deleteReten(code: String)
 }

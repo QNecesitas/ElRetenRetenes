@@ -10,17 +10,19 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.qnecesitas.elretenretenes.R
 import com.qnecesitas.elretenretenes.data.Store
+import com.qnecesitas.elretenretenes.adapters.AdapterStore.*
 import com.qnecesitas.elretenretenes.databinding.RecyclerStoreBinding
-import com.qnecesitas.elretenretenes.adapters.StoreAdapter.*
 
-class StoreAdapter(private val context: Context) :
-    ListAdapter<Store , StoreViewHolder>(DiffCallback) {
+class AdapterStore(private val context: Context) :
+    ListAdapter<Store ,StoreViewHolder>(DiffCallback) {
 
 
     private var clickEdit: ITouchEdit? = null
     private var clickDelete: ITouchDelete? = null
     private var clickSales: ITouchSales? = null
     private var clickAmount: ITouchAmount? = null
+    private var clickLocation: ITouchLocation? =null
+    private var clickEntry:ITouchEntry?=null
 
 
     class StoreViewHolder(private var binding: RecyclerStoreBinding) :
@@ -28,12 +30,14 @@ class StoreAdapter(private val context: Context) :
 
         @SuppressLint("SimpleDateFormat")
         fun bind(
-            store: Store ,
+            store:Store,
             context: Context ,
             clickEdit: ITouchEdit? ,
             clickDelete: ITouchDelete? ,
             clickSales: ITouchSales? ,
-            clickAmount: ITouchAmount?
+            clickAmount: ITouchAmount? ,
+            clickLocation: ITouchLocation?,
+            clickEntry:ITouchEntry?
         ) {
 
             //Declare
@@ -42,7 +46,7 @@ class StoreAdapter(private val context: Context) :
 
 
 
-            binding.tvSize.text = size.toString()
+            binding.tvSize.text = size
             binding.tvAmount.text = amount.toString()
             binding.menuOption.setOnClickListener {
                 val popupMenu = PopupMenu(context, binding.menuOption)
@@ -64,6 +68,13 @@ class StoreAdapter(private val context: Context) :
 
                         R.id.menu_option_reten_amount -> {
                             clickAmount?.onClickAmount(store)
+                        }
+
+                        R.id.menu_option_reten_location ->{
+                            clickLocation?.onClickLocation(store)
+                        }
+                        R.id.menu_option_reten_entry ->{
+                            clickEntry?.onClickEntry(store)
                         }
                     }
                     false
@@ -92,7 +103,7 @@ class StoreAdapter(private val context: Context) :
     override fun onBindViewHolder(holder: StoreViewHolder, position: Int) {
         holder.bind(
             getItem(position), context,
-            clickEdit, clickDelete, clickSales, clickAmount
+            clickEdit, clickDelete, clickSales, clickAmount,clickLocation,clickEntry
         )
     }
 
@@ -140,6 +151,22 @@ class StoreAdapter(private val context: Context) :
 
     fun setClickAmount(clickAmount: ITouchAmount?) {
         this.clickAmount = clickAmount
+    }
+
+    interface ITouchLocation {
+        fun onClickLocation(store: Store)
+    }
+
+    fun setClickLocation(clickLocation: ITouchLocation?) {
+        this.clickLocation = clickLocation
+    }
+
+    interface ITouchEntry {
+        fun onClickEntry(store: Store)
+    }
+
+    fun setClickEntry(clickEntry: ITouchEntry?) {
+        this.clickEntry = clickEntry
     }
 
 

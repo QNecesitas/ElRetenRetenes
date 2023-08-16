@@ -163,7 +163,7 @@
                         android:id="@+id/tiet_size"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/tama_o"
+                        android:hint="@string/medida1"
                         android:inputType="text"
                         android:maxLength="50" />
 

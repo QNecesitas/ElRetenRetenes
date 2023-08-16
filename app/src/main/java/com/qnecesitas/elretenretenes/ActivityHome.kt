@@ -50,9 +50,9 @@ class ActivityHome : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (tabSelect == 0) {
-                    //TODO fragmentCounter.callFilterByText(newText.toString())
+                    fragmentCounter.callFilterByText(newText.toString())
                 } else {
-                    //TODO fragmentStore.callFilterByText(newText.toString())
+                    fragmentStore.callFilterByText(newText.toString())
                 }
                 return false
             }
@@ -79,7 +79,7 @@ class ActivityHome : AppCompatActivity() {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 when (tab.position) {
                     0 -> {
-                        // Código para ejecutar cuando se selecciona la pestaña Conductores
+                        // Código para ejecutar cuando se selecciona la pestaña Mostrador
                         showFragmentCounter()
                         tabSelect = 0
                         binding.clSearch.visibility = View.GONE
@@ -89,7 +89,7 @@ class ActivityHome : AppCompatActivity() {
                     }
 
                     1 -> {
-                        // Código para ejecutar cuando se selecciona la pestaña Viajes
+                        // Código para ejecutar cuando se selecciona la pestaña Almacén
                         showFragmentStore()
                         tabSelect = 1
                         binding.clSearch.visibility = View.GONE

@@ -77,4 +77,7 @@
     <string name="modificar_cantidad">Modificar cantidad</string>
     <string name="restar">restar</string>
     <string name="sumar">sumar</string>
+    <string name="medida1">Medida</string>
+    <string name="entrada">Entrada</string>
+    <string name="a_adir_entrada">Añadir entrada</string>
 </resources>

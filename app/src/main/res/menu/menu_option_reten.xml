@@ -21,6 +21,10 @@
         android:title="@string/localizacion"
         android:id="@+id/menu_option_reten_location"
         />
+    <item
+        android:title="@string/entrada"
+        android:id="@+id/menu_option_reten_entry"
+        />
 
 
 </menu>
