@@ -14,16 +14,16 @@ import com.qnecesitas.elretenretenes.databinding.RecyclerCounterBinding
 import com.qnecesitas.elretenretenes.adapters.CounterAdapter.*
 
 class CounterAdapter(private val context: Context) :
-    ListAdapter<Counter ,CounterViewHolder>(DiffCallback) {
+    ListAdapter<Counter , CounterViewHolder>(DiffCallback) {
 
 
     private var clickEdit: ITouchEdit? = null
     private var clickDelete: ITouchDelete? = null
     private var clickSales: ITouchSales? = null
     private var clickAmount: ITouchAmount? = null
-    private var clickLocation: ITouchLocation? =null
-    private var clickEntry:ITouchEntry?=null
-    private var clickTransfer:ITouchTransfer?=null
+    private var clickLocation: ITouchLocation? = null
+    private var clickEntry: ITouchEntry? = null
+    private var clickTransfer: ITouchTransfer? = null
 
 
     class CounterViewHolder(private var binding: RecyclerCounterBinding) :
@@ -37,13 +37,13 @@ class CounterAdapter(private val context: Context) :
             clickDelete: ITouchDelete? ,
             clickSales: ITouchSales? ,
             clickAmount: ITouchAmount? ,
-            clickLocation: ITouchLocation?,
-            clickEntry: ITouchEntry?,
+            clickLocation: ITouchLocation? ,
+            clickEntry: ITouchEntry? ,
             clickTransfer: ITouchTransfer?
         ) {
 
             //Declare
-            val amount =counter.amount
+            val amount = counter.amount
             val size = counter.size
 
 
@@ -51,8 +51,8 @@ class CounterAdapter(private val context: Context) :
             binding.tvSize.text = size
             binding.tvAmount.text = amount.toString()
             binding.menuOption.setOnClickListener {
-                val popupMenu = PopupMenu(context, binding.menuOption)
-                popupMenu.menuInflater.inflate(R.menu.menu_option_reten, popupMenu.menu)
+                val popupMenu = PopupMenu(context , binding.menuOption)
+                popupMenu.menuInflater.inflate(R.menu.menu_option_reten , popupMenu.menu)
                 popupMenu.setOnMenuItemClickListener { menuItem ->
                     when (menuItem.itemId) {
                         R.id.menu_option_reten_edit -> {
@@ -72,15 +72,15 @@ class CounterAdapter(private val context: Context) :
                             clickAmount?.onClickAmount(counter)
                         }
 
-                        R.id.menu_option_reten_location ->{
+                        R.id.menu_option_reten_location -> {
                             clickLocation?.onClickLocation(counter)
                         }
 
-                        R.id.menu_option_reten_entry ->{
+                        R.id.menu_option_reten_entry -> {
                             clickEntry?.onClickEntry(counter)
                         }
 
-                        R.id.menu_option_reten_transfer ->{
+                        R.id.menu_option_reten_transfer -> {
                             clickTransfer?.onClickTransfer(counter)
                         }
                     }
@@ -95,8 +95,8 @@ class CounterAdapter(private val context: Context) :
     override fun onCreateViewHolder(parent: ViewGroup , viewType: Int): CounterViewHolder {
         val viewHolder = CounterViewHolder(
             RecyclerCounterBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
+                LayoutInflater.from(parent.context) ,
+                parent ,
                 false
             )
         )
@@ -107,20 +107,27 @@ class CounterAdapter(private val context: Context) :
     }
 
 
-    override fun onBindViewHolder(holder: CounterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CounterViewHolder , position: Int) {
         holder.bind(
-            getItem(position), context,
-            clickEdit, clickDelete, clickSales, clickAmount,clickLocation,clickEntry,clickTransfer
+            getItem(position) ,
+            context ,
+            clickEdit ,
+            clickDelete ,
+            clickSales ,
+            clickAmount ,
+            clickLocation ,
+            clickEntry ,
+            clickTransfer
         )
     }
 
     companion object {
         private val DiffCallback = object : DiffUtil.ItemCallback<Counter>() {
-            override fun areItemsTheSame(oldItem: Counter, newItem: Counter): Boolean {
+            override fun areItemsTheSame(oldItem: Counter , newItem: Counter): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: Counter, newItem: Counter): Boolean {
+            override fun areContentsTheSame(oldItem: Counter , newItem: Counter): Boolean {
                 return oldItem == newItem
             }
 
@@ -183,7 +190,6 @@ class CounterAdapter(private val context: Context) :
     fun setClickTransfer(clickTransfer: ITouchTransfer?) {
         this.clickTransfer = clickTransfer
     }
-
 
 
 }

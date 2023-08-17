@@ -158,6 +158,28 @@ class StoreViewModel(private val storeDao: StoreDao) : ViewModel() {
 
 
     }
+
+    suspend fun addSales(
+        code: String ,
+        codeProduct: String ,
+        totalPrice: Double ,
+        totalInv: Double ,
+        amount: Int ,
+        day: Int ,
+        month: Int ,
+        year: Int
+    ) {
+        storeDao.insertSales(
+            code ,
+            codeProduct ,
+            totalPrice ,
+            totalInv ,
+            amount ,
+            day ,
+            month ,
+            year
+        )
+    }
 }
 
 class StoreViewModelFactory(

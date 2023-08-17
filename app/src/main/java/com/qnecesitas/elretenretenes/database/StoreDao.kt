@@ -68,5 +68,17 @@ interface StoreDao {
         brand: String
     )
 
+    @Query("INSERT INTO Sales VALUES (:code,:codeProduct,:totalPrice,:totalInv,:amount,:day,:month,:year)")
+    suspend fun insertSales(
+        code: String ,
+        codeProduct: String ,
+        totalPrice: Double ,
+        totalInv: Double ,
+        amount: Int ,
+        day: Int ,
+        month: Int ,
+        year: Int
+    )
+
 
 }

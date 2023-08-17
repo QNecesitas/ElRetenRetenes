@@ -159,6 +159,29 @@ class CounterViewModel(private val counterDao: CounterDao) : ViewModel() {
 
     }
 
+    suspend fun addSales(
+        code: String ,
+        codeProduct: String ,
+        totalPrice: Double ,
+        totalInv: Double ,
+        amount: Int ,
+        day: Int ,
+        month: Int ,
+        year: Int
+    ) {
+        counterDao.insertSales(
+            code ,
+            codeProduct ,
+            totalPrice ,
+            totalInv ,
+            amount ,
+            day ,
+            month ,
+            year
+        )
+    }
+
+
 }
 
 class CounterViewModelFactory(

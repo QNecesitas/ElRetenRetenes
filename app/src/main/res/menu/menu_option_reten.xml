@@ -2,33 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title="@string/editar"
         android:id="@+id/menu_option_reten_edit"
-        />
+        android:title="@string/editar" />
     <item
-        android:title="@string/eliminar"
         android:id="@+id/menu_option_reten_delete"
-        />
+        android:title="@string/eliminar" />
     <item
-        android:title="@string/vender"
         android:id="@+id/menu_option_reten_sales"
-        />
+        android:title="@string/vender" />
     <item
-        android:title="@string/cantidad"
         android:id="@+id/menu_option_reten_amount"
-        />
+        android:title="@string/cantidad" />
     <item
-        android:title="@string/localizacion"
         android:id="@+id/menu_option_reten_location"
-        />
+        android:title="@string/localizacion" />
     <item
-        android:title="@string/entrada"
         android:id="@+id/menu_option_reten_entry"
-        />
+        android:title="@string/entrada" />
     <item
-        android:title="@string/transferir"
         android:id="@+id/menu_option_reten_transfer"
-        />
+        android:title="@string/transferir" />
 
 
 </menu>

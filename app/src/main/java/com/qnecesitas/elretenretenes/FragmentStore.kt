@@ -20,6 +20,7 @@ import com.qnecesitas.elretenretenes.databinding.FragmentStoreBinding
 import com.qnecesitas.elretenretenes.databinding.LiAddRetenBinding
 import com.qnecesitas.elretenretenes.databinding.LiEditAmountBinding
 import com.qnecesitas.elretenretenes.databinding.LiEditRetenBinding
+import com.qnecesitas.elretenretenes.databinding.LiSalesSealsBinding
 import com.qnecesitas.elretenretenes.databinding.LiTransferAmountBinding
 import com.qnecesitas.elretenretenes.viewmodels.StoreViewModel
 import com.qnecesitas.elretenretenes.viewmodels.StoreViewModelFactory
@@ -28,6 +29,7 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.Calendar
 
 class FragmentStore : Fragment() {
 
@@ -39,6 +41,7 @@ class FragmentStore : Fragment() {
     private var li_edit_binding: LiEditRetenBinding? = null
     private var li_amount_binding: LiEditAmountBinding? = null
     private var li_transfer_binding: LiTransferAmountBinding? = null
+    private var li_sales_binding: LiSalesSealsBinding? = null
 
     //Recycler
     private lateinit var alStore: MutableList<Store>
@@ -117,6 +120,12 @@ class FragmentStore : Fragment() {
         adapterStore.setClickTransfer(object : AdapterStore.ITouchTransfer {
             override fun onClickTransfer(store: Store) {
                 liTransferAmount(store)
+            }
+
+        })
+        adapterStore.setClickSales(object : AdapterStore.ITouchSales {
+            override fun onClickSales(store: Store) {
+                liSalesSeals(store)
             }
 
         })
@@ -664,6 +673,10 @@ class FragmentStore : Fragment() {
                     li_transfer_binding!!.et.setText(currentAmount.toString())
                 } else if (li_transfer_binding!!.et.text.toString() == "") {
                     currentAmount = 1
+                } else if (li_transfer_binding!!.et.text.toString()
+                        .toInt() > store.amount
+                ) {
+                    li_transfer_binding!!.et.setText(store.amount.toString())
                 } else {
                     currentAmount = li_transfer_binding!!.et.text.toString().toInt()
                 }
@@ -682,8 +695,7 @@ class FragmentStore : Fragment() {
         li_transfer_binding!!.btnAccept.setOnClickListener {
             lifecycleScope.launch {
                 if (li_transfer_binding!!.et.text.toString()
-                        .isNotBlank() || li_transfer_binding!!.et.text.toString()
-                        .toInt() <= store.amount
+                        .isNotBlank()
                 ) {
                     val count = viewModel.isDuplicateCounter(store.code)
                     if (count == store.code) {
@@ -730,7 +742,7 @@ class FragmentStore : Fragment() {
 
                 } else {
                     li_transfer_binding!!.et.error =
-                        getString(R.string.no_puede_transferir_esa_cantidad)
+                        getString(R.string.este_campo_no_debe_vacio)
                 }
             }
         }
@@ -745,5 +757,115 @@ class FragmentStore : Fragment() {
         alertDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         alertDialog.show()
 
+    }
+
+    fun liSalesSeals(store: Store) {
+        val inflater = LayoutInflater.from(binding.root.context)
+        li_sales_binding = LiSalesSealsBinding.inflate(inflater)
+        val builder = AlertDialog.Builder(binding.root.context)
+        builder.setView(li_sales_binding!!.root)
+        val alertDialog = builder.create()
+
+        //Filling and listeners
+        loadRecyclerInfoAll()
+        var currentAmount = 0
+        li_sales_binding!!.et.setText(currentAmount.toString())
+
+        li_sales_binding!!.ivBtnMore.setOnClickListener {
+            if (currentAmount != store.amount) {
+                currentAmount++
+                li_sales_binding!!.et.setText(currentAmount.toString())
+            }
+        }
+
+        li_sales_binding!!.ivBtnLess.setOnClickListener {
+            if (currentAmount != 0) {
+                currentAmount--
+                li_sales_binding!!.et.setText(currentAmount.toString())
+            }
+        }
+
+        li_sales_binding!!.et.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(charSequence: CharSequence , i: Int , i1: Int , i2: Int) {
+                if (li_sales_binding!!.et.text.toString() == "0") {
+                    currentAmount = 1
+                    li_sales_binding!!.et.setText(currentAmount.toString())
+                } else if (li_sales_binding!!.et.text.toString() == "") {
+                    currentAmount = 1
+                } else if (li_sales_binding!!.et.text.toString()
+                        .toInt() > store.amount
+                ) {
+                    li_sales_binding!!.et.setText(store.amount.toString())
+                } else {
+                    currentAmount = li_sales_binding!!.et.text.toString().toInt()
+                }
+            }
+
+            override fun afterTextChanged(editable: Editable) {}
+            override fun beforeTextChanged(
+                charSequence: CharSequence ,
+                i: Int ,
+                i1: Int ,
+                i2: Int
+            ) {
+            }
+        })
+
+        li_sales_binding!!.btnAccept.setOnClickListener {
+            lifecycleScope.launch {
+                if (li_sales_binding!!.et.text.toString()
+                        .isNotBlank()
+                ) {
+                    val date = Calendar.getInstance()
+                    val day = date.get(Calendar.DAY_OF_MONTH)
+                    val month = date.get(Calendar.MONTH) + 1
+                    val year = date.get(Calendar.YEAR)
+                    val code = IDCreater.generate()
+                    val totalPrice =
+                        store.salePrice * li_sales_binding!!.et.text.toString().toInt()
+                    val totalInv = store.buyPrice * li_sales_binding!!.et.text.toString().toInt()
+                    viewModel.addSales(
+                        code ,
+                        store.code ,
+                        totalPrice ,
+                        totalInv ,
+                        li_sales_binding!!.et.text.toString().toInt() ,
+                        day ,
+                        month ,
+                        year
+                    )
+                    viewModel.updateAmount(
+                        store.code ,
+                        store.amount - li_sales_binding!!.et.text.toString().toInt()
+                    )
+
+                    alertDialog.dismiss()
+
+
+                    FancyToast.makeText(
+                        requireContext() ,
+                        getString(R.string.operacion_realizada_con_exito) ,
+                        FancyToast.LENGTH_LONG ,
+                        FancyToast.SUCCESS ,
+                        false
+                    ).show()
+
+
+                } else {
+                    li_sales_binding!!.et.error =
+                        (getString(R.string.este_campo_no_debe_vacio))
+                }
+            }
+        }
+
+        li_sales_binding!!.btnCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        //Finished
+        alertDialog.setCancelable(false)
+        alertDialog.window!!.setGravity(Gravity.CENTER)
+        alertDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        alertDialog.show()
     }
 }

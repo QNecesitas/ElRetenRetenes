@@ -14,16 +14,16 @@ import com.qnecesitas.elretenretenes.adapters.AdapterStore.*
 import com.qnecesitas.elretenretenes.databinding.RecyclerStoreBinding
 
 class AdapterStore(private val context: Context) :
-    ListAdapter<Store ,StoreViewHolder>(DiffCallback) {
+    ListAdapter<Store , StoreViewHolder>(DiffCallback) {
 
 
     private var clickEdit: ITouchEdit? = null
     private var clickDelete: ITouchDelete? = null
     private var clickSales: ITouchSales? = null
     private var clickAmount: ITouchAmount? = null
-    private var clickLocation: ITouchLocation? =null
-    private var clickEntry:ITouchEntry?=null
-    private var clickTransfer:ITouchTransfer?=null
+    private var clickLocation: ITouchLocation? = null
+    private var clickEntry: ITouchEntry? = null
+    private var clickTransfer: ITouchTransfer? = null
 
 
     class StoreViewHolder(private var binding: RecyclerStoreBinding) :
@@ -31,19 +31,19 @@ class AdapterStore(private val context: Context) :
 
         @SuppressLint("SimpleDateFormat")
         fun bind(
-            store:Store,
+            store: Store ,
             context: Context ,
             clickEdit: ITouchEdit? ,
             clickDelete: ITouchDelete? ,
             clickSales: ITouchSales? ,
             clickAmount: ITouchAmount? ,
-            clickLocation: ITouchLocation?,
-            clickEntry:ITouchEntry?,
-            clickTransfer:ITouchTransfer?
+            clickLocation: ITouchLocation? ,
+            clickEntry: ITouchEntry? ,
+            clickTransfer: ITouchTransfer?
         ) {
 
             //Declare
-            val amount =store.amount
+            val amount = store.amount
             val size = store.size
 
 
@@ -51,8 +51,8 @@ class AdapterStore(private val context: Context) :
             binding.tvSize.text = size
             binding.tvAmount.text = amount.toString()
             binding.menuOption.setOnClickListener {
-                val popupMenu = PopupMenu(context, binding.menuOption)
-                popupMenu.menuInflater.inflate(R.menu.menu_option_reten, popupMenu.menu)
+                val popupMenu = PopupMenu(context , binding.menuOption)
+                popupMenu.menuInflater.inflate(R.menu.menu_option_reten , popupMenu.menu)
                 popupMenu.setOnMenuItemClickListener { menuItem ->
                     when (menuItem.itemId) {
                         R.id.menu_option_reten_edit -> {
@@ -72,13 +72,15 @@ class AdapterStore(private val context: Context) :
                             clickAmount?.onClickAmount(store)
                         }
 
-                        R.id.menu_option_reten_location ->{
+                        R.id.menu_option_reten_location -> {
                             clickLocation?.onClickLocation(store)
                         }
-                        R.id.menu_option_reten_entry ->{
+
+                        R.id.menu_option_reten_entry -> {
                             clickEntry?.onClickEntry(store)
                         }
-                        R.id.menu_option_reten_transfer ->{
+
+                        R.id.menu_option_reten_transfer -> {
                             clickTransfer?.onClickTransfer(store)
                         }
                     }
@@ -93,8 +95,8 @@ class AdapterStore(private val context: Context) :
     override fun onCreateViewHolder(parent: ViewGroup , viewType: Int): StoreViewHolder {
         val viewHolder = StoreViewHolder(
             RecyclerStoreBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
+                LayoutInflater.from(parent.context) ,
+                parent ,
                 false
             )
         )
@@ -105,10 +107,17 @@ class AdapterStore(private val context: Context) :
     }
 
 
-    override fun onBindViewHolder(holder: StoreViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: StoreViewHolder , position: Int) {
         holder.bind(
-            getItem(position), context,
-            clickEdit, clickDelete, clickSales, clickAmount,clickLocation,clickEntry,clickTransfer
+            getItem(position) ,
+            context ,
+            clickEdit ,
+            clickDelete ,
+            clickSales ,
+            clickAmount ,
+            clickLocation ,
+            clickEntry ,
+            clickTransfer
         )
     }
 
@@ -181,7 +190,6 @@ class AdapterStore(private val context: Context) :
     fun setClickTransfer(clickTransfer: ITouchTransfer?) {
         this.clickTransfer = clickTransfer
     }
-
 
 
 }

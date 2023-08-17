@@ -48,7 +48,7 @@
                     app:layout_constraintBottom_toTopOf="@id/llh_et_and_btn"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </LinearLayout>
 
@@ -86,7 +86,7 @@
                     android:minWidth="50sp"
                     android:textAlignment="center"
                     android:textSize="16sp"
-                    tools:ignore="LabelFor"/>
+                    tools:ignore="LabelFor" />
 
                 <!--btn more(+)-->
                 <ImageView

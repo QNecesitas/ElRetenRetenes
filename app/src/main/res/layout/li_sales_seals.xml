@@ -41,7 +41,7 @@
                     android:paddingTop="10dp"
                     android:paddingEnd="20dp"
                     android:paddingBottom="10dp"
-                    android:text="@string/a_adir_entrada"
+                    android:text="@string/cantidad"
                     android:textAlignment="center"
                     android:textColor="?attr/colorOnPrimary"
                     android:textSize="16sp"

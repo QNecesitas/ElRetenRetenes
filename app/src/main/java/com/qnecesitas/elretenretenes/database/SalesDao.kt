@@ -10,8 +10,8 @@ interface SalesDao {
     fun insertSales(
         code: String ,
         codeProduct: String ,
-        totalPrice: Int ,
-        totalInv: Int ,
+        totalPrice: Double ,
+        totalInv: Double ,
         amount: Int ,
         day: Int ,
         month: Int ,
