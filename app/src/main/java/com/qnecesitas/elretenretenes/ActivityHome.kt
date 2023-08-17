@@ -23,7 +23,7 @@ class ActivityHome : AppCompatActivity() {
 
 
     //Fragments
-    private var fragmentManager: FragmentManager? = null
+    private lateinit var fragmentManager: FragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +62,7 @@ class ActivityHome : AppCompatActivity() {
             binding.clSearch.visibility = View.VISIBLE
             binding.ivIconSearch.visibility = View.GONE
             binding.ivIconSetting.visibility = View.GONE
+            binding.search.setQuery("" , false)
         }
         binding.ivCloseSearch.setOnClickListener {
             binding.clSearch.visibility = View.GONE
@@ -85,7 +86,6 @@ class ActivityHome : AppCompatActivity() {
                         binding.clSearch.visibility = View.GONE
                         binding.ivIconSearch.visibility = View.VISIBLE
                         binding.ivIconSetting.visibility = View.VISIBLE
-                        binding.search.setQuery("" , false)
                     }
 
                     1 -> {
@@ -95,7 +95,6 @@ class ActivityHome : AppCompatActivity() {
                         binding.clSearch.visibility = View.GONE
                         binding.ivIconSearch.visibility = View.VISIBLE
                         binding.ivIconSetting.visibility = View.VISIBLE
-                        binding.search.setQuery("" , false)
                     }
                 }
             }
@@ -112,13 +111,13 @@ class ActivityHome : AppCompatActivity() {
     }
 
     fun showFragmentCounter() {
-        fragmentManager!!.beginTransaction()
+        fragmentManager.beginTransaction()
             .replace(R.id.frame , fragmentCounter)
             .commit()
     }
 
     fun showFragmentStore() {
-        fragmentManager!!.beginTransaction()
+        fragmentManager.beginTransaction()
             .replace(R.id.frame , fragmentStore)
             .commit()
     }
