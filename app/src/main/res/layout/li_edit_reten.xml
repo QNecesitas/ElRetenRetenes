@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--cv_main_content-->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_main_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp">
+
+
+            <!--cl_main_content-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_main_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="15sp">
+
+                <!--cv_image-->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:translationZ="8dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="8dp"
+                    app:layout_constraintBottom_toBottomOf="@id/til_localizacion"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/til_code">
+
+                    <!--image-->
+                    <ImageView
+                        android:id="@+id/image"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:background="?attr/colorPrimary"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/baseline_image_search_24"
+                        app:tint="?attr/colorOnPrimary" />
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <!--til_code-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_code"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/cv_image"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <!--tiet_code-->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/c_digo"
+                        android:inputType="text"
+                        android:maxLength="100"
+                        android:enabled="false"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <!--til_localización-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_localizacion"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/cv_image"
+                    app:layout_constraintTop_toBottomOf="@id/til_code">
+
+                    <!--tiet_localización-->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_localizacion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/localizaci_n"
+                        android:inputType="text"
+                        android:maxLength="50" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--til_brand-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_brand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:minWidth="180dp"
+                    app:layout_constraintEnd_toStartOf="@id/tv_priceBuy_CUP"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="@+id/cv_image"
+                    app:layout_constraintTop_toBottomOf="@id/cv_image">
+
+                    <!--tiet_brand-->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_brand"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/marca"
+                        android:inputType="text"
+                        android:maxLength="50" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--til_price_buy-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_price_buy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:minWidth="180dp"
+                    app:layout_constraintEnd_toStartOf="@id/tv_priceBuy_CUP"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="@+id/cv_image"
+                    app:layout_constraintTop_toBottomOf="@id/til_size">
+
+                    <!--tiet_price_buy-->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_price_buy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/precio_de_compra"
+                        android:inputType="numberDecimal"
+                        android:maxLength="10"
+                        android:text="0" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--til_measure-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:minWidth="150dp"
+                    app:layout_constraintEnd_toStartOf="@id/tv_priceSale_CUP"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="@+id/cv_image"
+                    app:layout_constraintTop_toBottomOf="@id/til_brand">
+
+                    <!--tiet_price_buy-->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_size"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/medida1"
+                        android:inputType="text"
+                        android:maxLength="50" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <!--Text price buy CUP-->
+                <TextView
+                    android:id="@+id/tv_priceBuy_CUP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12sp"
+                    android:text="@string/cup"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/til_price_buy"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toEndOf="@id/til_price_buy"
+                    app:layout_constraintTop_toTopOf="@+id/til_price_buy" />
+
+
+                <!--til_price_sale-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_price_sale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:minWidth="220dp"
+                    app:layout_constraintEnd_toStartOf="@id/tv_priceSale_CUP"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="@+id/cv_image"
+                    app:layout_constraintTop_toBottomOf="@id/til_price_buy">
+
+                    <!--tiet_price_buy-->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_price_sale"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/precio_de_venta"
+                        android:inputType="numberDecimal"
+                        android:maxLength="10"
+                        android:text="0" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <!--Text price sale CUP-->
+                <TextView
+                    android:id="@+id/tv_priceSale_CUP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12sp"
+                    android:text="@string/cup"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/til_price_sale"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toEndOf="@id/til_price_sale"
+                    app:layout_constraintTop_toTopOf="@+id/til_price_sale" />
+
+
+                <!--til_cant-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_cant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:minWidth="190dp"
+                    app:layout_constraintEnd_toStartOf="@id/tv_cant_uni"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="@+id/cv_image"
+                    app:layout_constraintTop_toBottomOf="@id/til_price_sale">
+
+                    <!--tiet_cant-->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_cant"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/cantidad"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:text="0" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <!--Text cant uni-->
+                <TextView
+                    android:id="@+id/tv_cant_uni"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12sp"
+                    android:text="@string/unidades"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/til_cant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toEndOf="@id/til_cant"
+                    app:layout_constraintTop_toTopOf="@+id/til_cant" />
+
+
+                <!--til_deficit-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_deficit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:minWidth="180dp"
+                    app:layout_constraintEnd_toStartOf="@id/tv_cant_uni"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="@+id/cv_image"
+                    app:layout_constraintTop_toBottomOf="@id/til_cant">
+
+                    <!--tiet_deficit-->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_deficit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/d_ficit"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:text="0" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <!--Text deficit-->
+                <TextView
+                    android:id="@+id/tv_deficit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12sp"
+                    android:text="@string/unidades"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/til_deficit"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toEndOf="@id/til_cant"
+                    app:layout_constraintTop_toTopOf="@+id/til_deficit" />
+
+
+                <!--Desc-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_desc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/cv_image"
+                    app:layout_constraintTop_toBottomOf="@id/til_deficit">
+
+                    <!--tiet_cant-->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/descripci_n"
+                        android:inputType="text"
+                        android:maxLength="250" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <!--cv_buttons-->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_buttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="300sp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="20dp">
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:singleSelection="true">
+
+                <Button
+                    android:id="@+id/btn_cancel"
+                    style="@style/transparent_button_outlined"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cancelar" />
+
+                <Button
+                    android:id="@+id/btn_accept"
+                    style="@style/transparent_button_outlined"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/actualizar" />
+
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</ScrollView>
+
