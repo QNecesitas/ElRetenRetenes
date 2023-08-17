@@ -8,22 +8,26 @@ import com.qnecesitas.elretenretenes.data.Counter
 import com.qnecesitas.elretenretenes.data.Sales
 import com.qnecesitas.elretenretenes.data.Store
 
-@Database(entities = [Store::class,Sales::class,Counter::class], version = 4, exportSchema = false)
+@Database(
+    entities = [Store::class , Sales::class , Counter::class] ,
+    version = 4 ,
+    exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun storeDao():StoreDao
-    abstract fun salesDao():SalesDao
-    abstract fun counterDao():CounterDao
+    abstract fun storeDao(): StoreDao
+    abstract fun salesDao(): SalesDao
+    abstract fun counterDao(): CounterDao
 
-    companion object{
+    companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
         fun getDatabase(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDatabase::class.java,
+                    context.applicationContext ,
+                    AppDatabase::class.java ,
                     "app_database"
                 )
                     .fallbackToDestructiveMigration()

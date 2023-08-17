@@ -25,6 +25,10 @@
         android:title="@string/entrada"
         android:id="@+id/menu_option_reten_entry"
         />
+    <item
+        android:title="@string/transferir"
+        android:id="@+id/menu_option_reten_transfer"
+        />
 
 
 </menu>

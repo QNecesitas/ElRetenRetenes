@@ -85,7 +85,7 @@ class ActivityHome : AppCompatActivity() {
                         binding.clSearch.visibility = View.GONE
                         binding.ivIconSearch.visibility = View.VISIBLE
                         binding.ivIconSetting.visibility = View.VISIBLE
-                        binding.search.setQuery("", false)
+                        binding.search.setQuery("" , false)
                     }
 
                     1 -> {
@@ -95,7 +95,7 @@ class ActivityHome : AppCompatActivity() {
                         binding.clSearch.visibility = View.GONE
                         binding.ivIconSearch.visibility = View.VISIBLE
                         binding.ivIconSetting.visibility = View.VISIBLE
-                        binding.search.setQuery("", false)
+                        binding.search.setQuery("" , false)
                     }
                 }
             }
@@ -113,13 +113,13 @@ class ActivityHome : AppCompatActivity() {
 
     fun showFragmentCounter() {
         fragmentManager!!.beginTransaction()
-            .replace(R.id.frame, fragmentCounter)
+            .replace(R.id.frame , fragmentCounter)
             .commit()
     }
 
     fun showFragmentStore() {
         fragmentManager!!.beginTransaction()
-            .replace(R.id.frame, fragmentStore)
+            .replace(R.id.frame , fragmentStore)
             .commit()
     }
 

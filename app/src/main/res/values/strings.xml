@@ -80,4 +80,6 @@
     <string name="medida1">Medida</string>
     <string name="entrada">Entrada</string>
     <string name="a_adir_entrada">Añadir entrada</string>
+    <string name="transferir">Transferir</string>
+    <string name="no_puede_transferir_esa_cantidad">No puede transferir esa cantidad</string>
 </resources>

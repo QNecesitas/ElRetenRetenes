@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.qnecesitas.elretenretenes.data.Store
 import com.qnecesitas.elretenretenes.database.StoreDao
 
-@Suppress("UNNECESSARY_NOT_NULL_ASSERTION")
-class StoreViewModel(private val storeDao: StoreDao): ViewModel() {
+
+class StoreViewModel(private val storeDao: StoreDao) : ViewModel() {
 
     //List counter
     private val _listStore = MutableLiveData<MutableList<Store>>()
@@ -82,11 +82,11 @@ class StoreViewModel(private val storeDao: StoreDao): ViewModel() {
     }
 
     suspend fun updateAmount(
-        code: String,
+        code: String ,
         amount: Int
-    ){
+    ) {
         storeDao.updateAmount(
-            code,
+            code ,
             amount
         )
     }
@@ -94,7 +94,7 @@ class StoreViewModel(private val storeDao: StoreDao): ViewModel() {
     fun filterByText(text: String) {
         if (text.trim().isNotEmpty()) {
             val filterList = _listStore.value?.filter {
-                it.size.contains(text, ignoreCase = true)
+                it.size.contains(text , ignoreCase = true)
 
             }?.toMutableList()
 
@@ -109,10 +109,54 @@ class StoreViewModel(private val storeDao: StoreDao): ViewModel() {
 
     suspend fun deleteReten(
         code: String
-    ){
+    ) {
         storeDao.deleteReten(
             code
         )
+    }
+
+    suspend fun isDuplicateCounter(code: String): String? {
+        return storeDao.selectDuplicateCounter(code)
+    }
+
+    suspend fun updateAmountCounter(
+        code: String ,
+        amount: Int
+    ) {
+        storeDao.updateAmountCounter(
+            code ,
+            amount
+        )
+    }
+
+    suspend fun getAmountCounter(code: String): Int {
+        return storeDao.fetchAmountCounter(code)
+    }
+
+    suspend fun addCounter(
+        code: String ,
+        location: String ,
+        amount: Int ,
+        buyPrice: Double ,
+        salePrice: Double ,
+        descr: String ,
+        deficit: Int ,
+        size: String ,
+        brand: String
+    ) {
+        storeDao.insertCounter(
+            code ,
+            location ,
+            amount ,
+            buyPrice ,
+            salePrice ,
+            descr ,
+            deficit ,
+            size ,
+            brand
+        )
+
+
     }
 }
 

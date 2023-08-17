@@ -6,13 +6,13 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Store(
-    @PrimaryKey(autoGenerate = false) var code:String ,
-    @ColumnInfo(name = "brand") var brand:String ,
-    @ColumnInfo(name = "amount") var amount:Int ,
-    @ColumnInfo(name = "buyPrice") var buyPrice:Double ,
-    @ColumnInfo(name = "salePrice") var salePrice:Double ,
-    @ColumnInfo(name = "descr") var descr:String ,
-    @ColumnInfo(name = "deficit") var deficit:Int ,
-    @ColumnInfo(name = "size") var size:String ,
-    @ColumnInfo(name = "location") var location:String
-    )
+    @PrimaryKey(autoGenerate = false) var code: String ,
+    @ColumnInfo(name = "brand") var brand: String ,
+    @ColumnInfo(name = "amount") var amount: Int ,
+    @ColumnInfo(name = "buyPrice") var buyPrice: Double ,
+    @ColumnInfo(name = "salePrice") var salePrice: Double ,
+    @ColumnInfo(name = "descr") var descr: String ,
+    @ColumnInfo(name = "deficit") var deficit: Int ,
+    @ColumnInfo(name = "size") var size: String ,
+    @ColumnInfo(name = "location") var location: String
+)

@@ -23,6 +23,7 @@ class AdapterStore(private val context: Context) :
     private var clickAmount: ITouchAmount? = null
     private var clickLocation: ITouchLocation? =null
     private var clickEntry:ITouchEntry?=null
+    private var clickTransfer:ITouchTransfer?=null
 
 
     class StoreViewHolder(private var binding: RecyclerStoreBinding) :
@@ -37,7 +38,8 @@ class AdapterStore(private val context: Context) :
             clickSales: ITouchSales? ,
             clickAmount: ITouchAmount? ,
             clickLocation: ITouchLocation?,
-            clickEntry:ITouchEntry?
+            clickEntry:ITouchEntry?,
+            clickTransfer:ITouchTransfer?
         ) {
 
             //Declare
@@ -76,6 +78,9 @@ class AdapterStore(private val context: Context) :
                         R.id.menu_option_reten_entry ->{
                             clickEntry?.onClickEntry(store)
                         }
+                        R.id.menu_option_reten_transfer ->{
+                            clickTransfer?.onClickTransfer(store)
+                        }
                     }
                     false
                 }
@@ -103,7 +108,7 @@ class AdapterStore(private val context: Context) :
     override fun onBindViewHolder(holder: StoreViewHolder, position: Int) {
         holder.bind(
             getItem(position), context,
-            clickEdit, clickDelete, clickSales, clickAmount,clickLocation,clickEntry
+            clickEdit, clickDelete, clickSales, clickAmount,clickLocation,clickEntry,clickTransfer
         )
     }
 
@@ -167,6 +172,14 @@ class AdapterStore(private val context: Context) :
 
     fun setClickEntry(clickEntry: ITouchEntry?) {
         this.clickEntry = clickEntry
+    }
+
+    interface ITouchTransfer {
+        fun onClickTransfer(store: Store)
+    }
+
+    fun setClickTransfer(clickTransfer: ITouchTransfer?) {
+        this.clickTransfer = clickTransfer
     }
 
 
