@@ -1,5 +1,6 @@
 package com.qnecesitas.elretenretenes
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -48,6 +49,12 @@ class ActivityHome : AppCompatActivity() {
         fragmentManager = supportFragmentManager
         fragmentCounter = FragmentCounter()
         fragmentStore = FragmentStore()
+
+        //Settings
+        binding.ivIconSetting.setOnClickListener {
+            val intent=Intent(this,ActivitySettings::class.java)
+            startActivity(intent)
+        }
 
         //SearchView
         binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

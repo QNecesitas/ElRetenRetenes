@@ -31,7 +31,7 @@ class ActivityLogin : AppCompatActivity() {
 
 
         //Preferences
-        sharedPreferences = getSharedPreferences("ElRetenBomba", 0)
+        sharedPreferences = getSharedPreferences("ElRetenRetenes", 0)
         sharedEditor = sharedPreferences.edit()
 
 
@@ -55,12 +55,12 @@ class ActivityLogin : AppCompatActivity() {
 
 
         binding.tvAboutUs.setOnClickListener{
-            //TODO val intent = Intent(this, Activity_AboutUs::class.java)
+            val intent = Intent(this, ActivityAboutUs::class.java)
             startActivity(intent)
         }
 
         binding.tvAboutDev.setOnClickListener{
-            //TODO val intent = Intent(this, Activity_AboutDev::class.java)
+            val intent = Intent(this, ActivityAboutDev::class.java)
             startActivity(intent)
         }
     }
