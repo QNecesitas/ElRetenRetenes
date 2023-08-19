@@ -82,4 +82,14 @@
     <string name="a_adir_entrada">Añadir entrada</string>
     <string name="transferir">Transferir</string>
     <string name="no_puede_transferir_esa_cantidad">No puede transferir esa cantidad</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="iniciar_sesi_n">Iniciar sesión</string>
+    <string name="sobre_desarrolladores">Sobre desarrolladores</string>
+    <string name="sobre_nosotros">Sobre nosotros</string>
+    <string name="contrase_a_incorrecta">Contraseña incorrecta</string>
+    <string name="salir">Salir</string>
+    <string name="desea_salir_de_la_aplicaci_n">¿Desea salir de la aplicación?</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
+    <string name="el_ret_n_retenes">El Retén Retenes</string>
 </resources>

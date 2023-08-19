@@ -181,6 +181,16 @@ class CounterViewModel(private val counterDao: CounterDao) : ViewModel() {
         )
     }
 
+    suspend fun getDeficitCounter():Int{
+        return counterDao.getDeficitCounter()
+    }
+
+    suspend fun getDeficitStore():Int{
+        return counterDao.getDeficitStore()
+    }
+
+
+
 
 }
 

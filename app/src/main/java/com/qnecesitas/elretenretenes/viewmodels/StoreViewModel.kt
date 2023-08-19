@@ -180,6 +180,7 @@ class StoreViewModel(private val storeDao: StoreDao) : ViewModel() {
             year
         )
     }
+
 }
 
 class StoreViewModelFactory(

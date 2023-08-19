@@ -1,7 +1,12 @@
 package com.qnecesitas.elretenretenes
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,12 +15,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import com.qnecesitas.elretenretenes.databinding.FragmentCounterBinding
 import com.qnecesitas.elretenretenes.viewmodels.CounterViewModel
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.qnecesitas.elretenretenes.adapters.CounterAdapter
+import com.qnecesitas.elretenretenes.auxiliary.Constants
 import com.qnecesitas.elretenretenes.auxiliary.IDCreater
 import com.qnecesitas.elretenretenes.data.Counter
 import com.qnecesitas.elretenretenes.databinding.LiAddRetenBinding
@@ -28,6 +35,7 @@ import com.shashank.sony.fancytoastlib.FancyToast
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
@@ -51,6 +59,12 @@ class FragmentCounter : Fragment() {
     private val viewModel: CounterViewModel by viewModels {
         CounterViewModelFactory((activity?.application as ElRetenRetenes).database.counterDao())
     }
+
+    //Notification
+    private val CHANNEL_ID: String = "ElReten"
+    private val CHANNEL_NAME = "ElReten"
+    lateinit var notificationManager : NotificationManager
+
     var section = "Mostrador"
 
     override fun onCreateView(
@@ -65,6 +79,10 @@ class FragmentCounter : Fragment() {
         alCounter = mutableListOf()
         adapterCounter = CounterAdapter(requireContext())
         binding.recycler.adapter = adapterCounter
+
+        //Notification
+        val context= requireActivity().applicationContext
+        notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         binding.btnAcept.setOnClickListener {
             liAddReten()
@@ -126,6 +144,10 @@ class FragmentCounter : Fragment() {
 
         })
         loadRecyclerInfoAll()
+        if (!Constants.Notificado){
+            Constants.Notificado=true
+            ifNotification()
+        }
 
         return binding.root
     }
@@ -861,6 +883,67 @@ class FragmentCounter : Fragment() {
         alertDialog.window!!.setGravity(Gravity.CENTER)
         alertDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         alertDialog.show()
+    }
+
+
+    private fun displayNotification1(counter: Int): Notification {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel =
+                NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH)
+            channel.description = getString(R.string.d_ficit)
+            channel.enableLights(true)
+            channel.lightColor = Color.RED
+            notificationManager.createNotificationChannel(channel)
+        }
+        val context= requireActivity().applicationContext
+        val builder: NotificationCompat.Builder =
+            NotificationCompat.Builder(context, CHANNEL_ID)
+                .setContentTitle(getString(R.string.d_ficit))
+                .setContentText("Mostrador: $counter productos.")
+                .setSmallIcon(R.drawable.ic_launcher_round)
+                .setAutoCancel(false)
+
+        return builder.build()
+
+    }
+
+    private fun displayNotification2(store: Int): Notification {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel =
+                NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH)
+            channel.description = getString(R.string.d_ficit)
+            channel.enableLights(true)
+            channel.lightColor = Color.RED
+            notificationManager.createNotificationChannel(channel)
+        }
+        val context= requireActivity().applicationContext
+        val builder: NotificationCompat.Builder =
+            NotificationCompat.Builder(context, CHANNEL_ID)
+                .setContentTitle(getString(R.string.d_ficit))
+                .setContentText("Almacén: $store productos.")
+                .setSmallIcon(R.drawable.ic_launcher_round)
+                .setAutoCancel(false)
+
+        return builder.build()
+
+    }
+    @OptIn(DelicateCoroutinesApi::class)
+    fun ifNotification() {
+        lifecycleScope.launch {
+            val deficitCounter = viewModel.getDeficitCounter()
+            val deficitStore = viewModel.getDeficitStore()
+            if (deficitCounter >= 1 && deficitStore >= 1) {
+                notificationManager.notify(8, displayNotification1(deficitCounter))
+                GlobalScope.launch {
+                    delay(5000)
+                    notificationManager.notify(9,displayNotification2(deficitStore))
+                }
+            } else if (deficitCounter >= 1 && deficitStore < 1) {
+                notificationManager.notify(9 , displayNotification1(deficitCounter))
+            } else if (deficitStore >= 1 && deficitCounter < 1) {
+                notificationManager.notify(9 , displayNotification2(deficitStore))
+            }
+        }
     }
 
 

@@ -38,4 +38,14 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
+
+    <style name="CustomBorderTIlLogin" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/mtrl_textinput_default_box_stroke_color</item>
+        <item name="boxStrokeWidth">2sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="boxStrokeErrorColor">@color/md_theme_light_onTertiary</item>
+        <item name="errorTextColor">@color/md_theme_light_onTertiary</item>
+        <item name="colorControlActivated">@color/white</item>
+    </style>
 </resources>

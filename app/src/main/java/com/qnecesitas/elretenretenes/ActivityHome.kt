@@ -8,13 +8,18 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.tabs.TabLayout
 import com.qnecesitas.elretenretenes.databinding.ActivityHomeBinding
 
+
 class ActivityHome : AppCompatActivity() {
 
     //Binding
     private lateinit var binding: ActivityHomeBinding
 
+
+
     //TabLayout
     private lateinit var tabLayout: TabLayout
+
+
 
     private lateinit var fragmentCounter: FragmentCounter
     private lateinit var fragmentStore: FragmentStore
@@ -36,6 +41,8 @@ class ActivityHome : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(true)
         binding.toolbar.setNavigationOnClickListener { finish() }
+
+
 
         //Fragments
         fragmentManager = supportFragmentManager
@@ -107,6 +114,8 @@ class ActivityHome : AppCompatActivity() {
                 // Código para ejecutar cuando una pestaña ya seleccionada se vuelve a seleccionar
             }
         })
+
+
         showFragmentCounter()
     }
 
@@ -121,6 +130,9 @@ class ActivityHome : AppCompatActivity() {
             .replace(R.id.frame , fragmentStore)
             .commit()
     }
+
+
+
 
 
 }
