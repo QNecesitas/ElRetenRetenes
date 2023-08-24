@@ -24,6 +24,7 @@ class ActivityHome : AppCompatActivity() {
 
     private lateinit var fragmentCounter: FragmentCounter
     private lateinit var fragmentStore: FragmentStore
+    private lateinit var fragmentStatistics: FragmentStatistics
 
     private var tabSelect = 0
 
@@ -49,6 +50,7 @@ class ActivityHome : AppCompatActivity() {
         fragmentManager = supportFragmentManager
         fragmentCounter = FragmentCounter()
         fragmentStore = FragmentStore()
+        fragmentStatistics=FragmentStatistics()
 
         //Settings
         binding.ivIconSetting.setOnClickListener {
@@ -65,7 +67,7 @@ class ActivityHome : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (tabSelect == 0) {
                     fragmentCounter.callFilterByText(newText.toString())
-                } else {
+                } else if (tabSelect == 1) {
                     fragmentStore.callFilterByText(newText.toString())
                 }
                 return false
@@ -90,6 +92,7 @@ class ActivityHome : AppCompatActivity() {
         tabLayout = binding.tabLayout
         tabLayout.addTab(tabLayout.newTab().setText("Mostrador"))
         tabLayout.addTab(tabLayout.newTab().setText("Almacén"))
+        tabLayout.addTab(tabLayout.newTab().setText("Estadísticas"))
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 when (tab.position) {
@@ -108,6 +111,15 @@ class ActivityHome : AppCompatActivity() {
                         tabSelect = 1
                         binding.clSearch.visibility = View.GONE
                         binding.ivIconSearch.visibility = View.VISIBLE
+                        binding.ivIconSetting.visibility = View.VISIBLE
+                    }
+
+                    2 ->{
+                        //Código para ejecutar cuando se selecciona la pestaña Estadísticas
+                        showFragmentStatistics()
+                        tabSelect = 2
+                        binding.clSearch.visibility = View.GONE
+                        binding.ivIconSearch.visibility = View.GONE
                         binding.ivIconSetting.visibility = View.VISIBLE
                     }
                 }
@@ -135,6 +147,12 @@ class ActivityHome : AppCompatActivity() {
     fun showFragmentStore() {
         fragmentManager.beginTransaction()
             .replace(R.id.frame , fragmentStore)
+            .commit()
+    }
+
+    fun showFragmentStatistics() {
+        fragmentManager.beginTransaction()
+            .replace(R.id.frame , fragmentStatistics)
             .commit()
     }
 

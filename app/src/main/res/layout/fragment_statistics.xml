@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <!--Scroll-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <!--Graph-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/CL_grafica"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray_light"
+                android:minHeight="250dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--Statistics-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:elevation="8dp"
+                android:translationZ="8dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="20dp"
+                    android:id="@+id/cl_statistics">
+
+                    <!--cl sales-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/sales"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/cl_statistics">
+
+                        <TextView
+                            android:id="@+id/text_sales"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/ventas"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <!--ll sales day-->
+                        <LinearLayout
+                            android:id="@+id/ll_sales_day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="50dp"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_horizontal"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/text_sales">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/d_a"
+                                android:textSize="18sp" />
+
+                            <ImageView
+                                android:id="@+id/iv_sales_day_calendar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:src="@drawable/baseline_calendar_month_24" />
+
+                            <TextView
+                                android:id="@+id/tv_sales_day_response"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="@string/escoger"
+                                android:textSize="18sp"
+                                android:visibility="visible" />
+
+                        </LinearLayout>
+
+                        <!--ll sales month-->
+                        <LinearLayout
+                            android:id="@+id/ll_sales_month"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="50dp"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_horizontal"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/ll_sales_day">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/mes"
+                                android:textSize="18sp" />
+
+                            <ImageView
+                                android:id="@+id/iv_sales_month_calendar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/baseline_calendar_month_24" />
+
+                            <TextView
+                                android:id="@+id/tv_sales_month_response"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="@string/escoger"
+                                android:textSize="18sp"
+                                android:visibility="visible" />
+
+                        </LinearLayout>
+
+                        <!--ll sales year-->
+                        <LinearLayout
+                            android:id="@+id/ll_sales_year"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="50dp"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_horizontal"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/ll_sales_month">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/a_o"
+                                android:textSize="18sp" />
+
+                            <ImageView
+                                android:id="@+id/iv_sales_year_calendar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:src="@drawable/baseline_calendar_month_24" />
+
+                            <TextView
+                                android:id="@+id/tv_sales_year_response"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="@string/escoger"
+                                android:textSize="18sp"
+                                android:visibility="visible" />
+
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        android:id="@+id/separator2"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@color/dark_gray"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/sales" />
+
+                    <!--cl profit-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/profit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/separator2">
+
+                        <TextView
+                            android:id="@+id/text_profit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/ganancias"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <!--ll profit day-->
+                        <LinearLayout
+                            android:id="@+id/ll_profit_day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="50dp"
+                            android:layout_marginTop="10dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/text_profit">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/d_a"
+                                android:textSize="18sp" />
+
+                            <ImageView
+                                android:id="@+id/iv_profit_day_calendar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:src="@drawable/baseline_calendar_month_24" />
+
+                            <TextView
+                                android:id="@+id/tv_profit_day_response"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="@string/escoger"
+                                android:textSize="18sp"
+                                android:visibility="visible" />
+
+                        </LinearLayout>
+
+                        <!--ll profit month-->
+                        <LinearLayout
+                            android:id="@+id/ll_profit_month"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="50dp"
+                            android:layout_marginTop="10dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/ll_profit_day">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/mes"
+                                android:textSize="18sp" />
+
+                            <ImageView
+                                android:id="@+id/iv_profit_month_calendar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/baseline_calendar_month_24" />
+
+                            <TextView
+                                android:id="@+id/tv_profit_month_response"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="@string/escoger"
+                                android:textSize="18sp"
+                                android:visibility="visible" />
+
+
+                            <!--CUP-->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="@string/cup"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="@id/ll_profit_month"
+                                app:layout_constraintStart_toEndOf="@id/ll_profit_month"
+                                app:layout_constraintTop_toTopOf="@id/ll_profit_month" />
+
+                        </LinearLayout>
+
+                        <!--ll profit year-->
+                        <LinearLayout
+                            android:id="@+id/ll_profit_year"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="50dp"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_horizontal"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/ll_profit_month">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/a_o"
+                                android:textSize="18sp" />
+
+                            <ImageView
+                                android:id="@+id/iv_profit_year_calendar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:src="@drawable/baseline_calendar_month_24" />
+
+                            <TextView
+                                android:id="@+id/tv_profit_year_response"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="@string/escoger"
+                                android:textSize="18sp"
+                                android:visibility="visible" />
+
+
+                            <!--CUP-->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="@string/cup"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="@id/ll_profit_year"
+                                app:layout_constraintStart_toEndOf="@id/ll_profit_year"
+                                app:layout_constraintTop_toTopOf="@id/ll_profit_year" />
+
+                        </LinearLayout>
+
+                        <!--CUP-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/cup"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@id/ll_profit_day"
+                            app:layout_constraintStart_toEndOf="@id/ll_profit_day"
+                            app:layout_constraintTop_toTopOf="@id/ll_profit_day" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -50,7 +50,7 @@
     <string name="men_de_opciones">Menú de opciones</string>
     <string name="editar">Editar</string>
     <string name="eliminar">Eliminar</string>
-    <string name="vender">Vender</string>
+    <string name="vender">Salida</string>
     <string name="cantidad">Cantidad</string>
     <string name="cup">cup</string>
     <string name="unidades">unidades</string>
@@ -122,5 +122,28 @@
     <string name="qnecesitas_nat_cu">qnecesitas.nat.cu</string>
     <string name="https_www_facebook_com_qnecesitas_paginaprincipal">https://www.facebook.com/qnecesitas.paginaprincipal</string>
     <string name="misi_n">Misión:</string>
+    <string name="revise_su_conexi_n_a_internet_e_intente_de_nuevo">Revise su conexión a Internet e intente de nuevo</string>
+    <string name="reintentar">Reintentar</string>
+    <string name="productos_m_s_vendidos">Productos más vendidos :</string>
+    <string name="buscar">Buscar</string>
+    <string name="ventas">Ventas :</string>
+    <string name="d_a">día :</string>
+    <string name="escoger">Escoger</string>
+    <string name="mes">mes :</string>
+    <string name="a_o">año :</string>
+    <string name="ganancias">Ganancias :</string>
+    <string name="seleccione_el_a_o_que_desea_filtrar">Seleccione el año que desea filtrar:</string>
+    <string name="a_o1">Año</string>
+    <string name="seleccione_el_mes_por_el_que_desea_filtrar">Seleccione el mes por el que desea filtrar:</string>
+    <string name="mes1">Mes</string>
+    <string name="seleccione_el_d_a_por_el_que_desea_filtrar">Seleccione el día por el que desea filtrar</string>
+    <string name="d_a1">Día</string>
+    <string name="No_hay_productos">No hay productos aún</string>
+    <string name="No_hay_ventas">No hay ventas aún</string>
+    <string name="Codigo_Info">Código: %s</string>
+    <string name="nombre"><b>Nombre:</b> %s</string>
+    <string name="ventas_cant">Ventas: %d</string>
+    <string name="no_hay_valores">No hay valores para mostrar aún</string>
+    <string name="m_s_vendidos_en_la_semana">Más vendidos en la semana:</string>
 
 </resources>

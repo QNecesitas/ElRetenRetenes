@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+
+    <item
+        android:id="@+id/menu_option_reten_entry"
+        android:title="@string/entrada" />
+
+    <item
+        android:id="@+id/menu_option_reten_sales"
+        android:title="@string/vender" />
+
+    <item
+        android:id="@+id/menu_option_reten_transfer"
+        android:title="@string/transferir" />
+
+    <item
+        android:id="@+id/menu_option_reten_amount"
+        android:title="@string/cantidad" />
+
+    <item
+        android:id="@+id/menu_option_reten_location"
+        android:title="@string/localizacion" />
     <item
         android:id="@+id/menu_option_reten_edit"
         android:title="@string/editar" />
     <item
         android:id="@+id/menu_option_reten_delete"
         android:title="@string/eliminar" />
-    <item
-        android:id="@+id/menu_option_reten_sales"
-        android:title="@string/vender" />
-    <item
-        android:id="@+id/menu_option_reten_amount"
-        android:title="@string/cantidad" />
-    <item
-        android:id="@+id/menu_option_reten_location"
-        android:title="@string/localizacion" />
-    <item
-        android:id="@+id/menu_option_reten_entry"
-        android:title="@string/entrada" />
-    <item
-        android:id="@+id/menu_option_reten_transfer"
-        android:title="@string/transferir" />
 
 
 </menu>
