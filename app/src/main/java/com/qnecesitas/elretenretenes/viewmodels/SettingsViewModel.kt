@@ -13,7 +13,7 @@ import java.io.FileOutputStream
 import java.io.OutputStream
 import java.lang.Exception
 
-class SettingsViewModel:ViewModel() {
+class SettingsViewModel : ViewModel() {
     fun exportBD(context: Context , outputStream: OutputStream?) {
         val database = AppDatabase.getDatabase(context)
         val currentDbPath = context.getDatabasePath(database.openHelper.databaseName)
@@ -55,7 +55,7 @@ class SettingsViewModel:ViewModel() {
     }
 }
 
-class SettingsViewModelFactory: ViewModelProvider.Factory {
+class SettingsViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SettingsViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

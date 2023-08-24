@@ -16,10 +16,8 @@ class ActivityHome : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
 
 
-
     //TabLayout
     private lateinit var tabLayout: TabLayout
-
 
 
     private lateinit var fragmentCounter: FragmentCounter
@@ -45,16 +43,15 @@ class ActivityHome : AppCompatActivity() {
         binding.toolbar.setNavigationOnClickListener { finish() }
 
 
-
         //Fragments
         fragmentManager = supportFragmentManager
         fragmentCounter = FragmentCounter()
         fragmentStore = FragmentStore()
-        fragmentStatistics=FragmentStatistics()
+        fragmentStatistics = FragmentStatistics()
 
         //Settings
         binding.ivIconSetting.setOnClickListener {
-            val intent=Intent(this,ActivitySettings::class.java)
+            val intent = Intent(this , ActivitySettings::class.java)
             startActivity(intent)
         }
 
@@ -114,7 +111,7 @@ class ActivityHome : AppCompatActivity() {
                         binding.ivIconSetting.visibility = View.VISIBLE
                     }
 
-                    2 ->{
+                    2 -> {
                         //Código para ejecutar cuando se selecciona la pestaña Estadísticas
                         showFragmentStatistics()
                         tabSelect = 2
@@ -155,9 +152,6 @@ class ActivityHome : AppCompatActivity() {
             .replace(R.id.frame , fragmentStatistics)
             .commit()
     }
-
-
-
 
 
 }

@@ -3,7 +3,6 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -99,7 +98,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:src="@drawable/baseline_calendar_month_24" />
+                                android:src="@drawable/baseline_calendar_month_24"
+                                android:contentDescription="@string/selecciona_la_fecha" />
 
                             <TextView
                                 android:id="@+id/tv_sales_day_response"
@@ -133,7 +133,8 @@
                                 android:id="@+id/iv_sales_month_calendar"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/baseline_calendar_month_24" />
+                                android:src="@drawable/baseline_calendar_month_24"
+                                android:contentDescription="@string/selecciona_la_fecha" />
 
                             <TextView
                                 android:id="@+id/tv_sales_month_response"
@@ -168,7 +169,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="4dp"
-                                android:src="@drawable/baseline_calendar_month_24" />
+                                android:src="@drawable/baseline_calendar_month_24"
+                                android:contentDescription="@string/selecciona_la_fecha" />
 
                             <TextView
                                 android:id="@+id/tv_sales_year_response"
@@ -236,7 +238,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:src="@drawable/baseline_calendar_month_24" />
+                                android:src="@drawable/baseline_calendar_month_24"
+                                android:contentDescription="@string/selecciona_la_fecha" />
 
                             <TextView
                                 android:id="@+id/tv_profit_day_response"
@@ -269,7 +272,8 @@
                                 android:id="@+id/iv_profit_month_calendar"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/baseline_calendar_month_24" />
+                                android:src="@drawable/baseline_calendar_month_24"
+                                android:contentDescription="@string/selecciona_la_fecha" />
 
                             <TextView
                                 android:id="@+id/tv_profit_month_response"
@@ -316,7 +320,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="4dp"
-                                android:src="@drawable/baseline_calendar_month_24" />
+                                android:src="@drawable/baseline_calendar_month_24"
+                                android:contentDescription="@string/selecciona_la_fecha" />
 
                             <TextView
                                 android:id="@+id/tv_profit_year_response"

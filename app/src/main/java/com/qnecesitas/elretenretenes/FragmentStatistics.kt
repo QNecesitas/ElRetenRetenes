@@ -48,7 +48,7 @@ class FragmentStatistics : Fragment() {
         repository = Repository(activity?.application as ElRetenRetenes)
         alSalesAll = ArrayList()
         alMonthSalesRanking = ArrayList()
-        listFilter= ArrayList()
+        listFilter = ArrayList()
 
         //Date
         val calendar = Calendar.getInstance()
@@ -110,29 +110,29 @@ class FragmentStatistics : Fragment() {
 
     private fun loadSalesAllMonths() {
         lifecycleScope.launch {
-            val date= Calendar.getInstance()
-            val month=date.get(Calendar.MONTH)+1
-            val monthLast=month - 1
-            val year= date.get(Calendar.YEAR)
-            val day=date.get(Calendar.DAY_OF_MONTH)
-            alSalesAll = repository.fetchSalesStatistics(month,monthLast,year)
-            Log.e("XXX","${alSalesAll.size}")
+            val date = Calendar.getInstance()
+            val month = date.get(Calendar.MONTH) + 1
+            val monthLast = month - 1
+            val year = date.get(Calendar.YEAR)
+            val day = date.get(Calendar.DAY_OF_MONTH)
+            alSalesAll = repository.fetchSalesStatistics(month , monthLast , year)
+            Log.e("XXX" , "${alSalesAll.size}")
             val listMonth = alSalesAll.filter {
                 it.month == month
             }
-            Log.e("YYY","${listMonth.size}")
-            val cantMonth= 30 - day
-            Log.e("BBB","$cantMonth")
-            date.set(year,monthLast-1,1)
+            Log.e("YYY" , "${listMonth.size}")
+            val cantMonth = 30 - day
+            Log.e("BBB" , "$cantMonth")
+            date.set(year , monthLast - 1 , 1)
             val lastDay = date.getActualMaximum(Calendar.DAY_OF_MONTH)
-            Log.e("AAA","$lastDay")
-            val dayLastDate=lastDay - cantMonth
-            val listMonthLast= alSalesAll.filter {
+            Log.e("AAA" , "$lastDay")
+            val dayLastDate = lastDay - cantMonth
+            val listMonthLast = alSalesAll.filter {
                 it.day > dayLastDate
             }
-            Log.e("ZZZ","${listMonthLast.size}")
-            val listFilter=listMonth + listMonthLast
-            Log.e("WWW","${listFilter.size}")
+            Log.e("ZZZ" , "${listMonthLast.size}")
+            val listFilter = listMonth + listMonthLast
+            Log.e("WWW" , "${listFilter.size}")
 
             updateChart(listFilter)
         }
@@ -184,7 +184,6 @@ class FragmentStatistics : Fragment() {
     }
 
 
-
     //Profits Year
     private fun callProfitYear(year: Int) {
         lifecycleScope.launch {
@@ -193,7 +192,6 @@ class FragmentStatistics : Fragment() {
             binding.tvProfitYearResponse.visibility = View.VISIBLE
         }
     }
-
 
 
     fun composeProfit(list: MutableList<Sales>): String {
@@ -216,7 +214,6 @@ class FragmentStatistics : Fragment() {
     }
 
 
-
     //Sales Month
     private fun callSalesMonth(year: Int , month: Int) {
         lifecycleScope.launch {
@@ -229,7 +226,6 @@ class FragmentStatistics : Fragment() {
     }
 
 
-
     //Sales Year
     private fun callSalesYear(year: Int) {
 
@@ -239,7 +235,6 @@ class FragmentStatistics : Fragment() {
             binding.tvSalesYearResponse.visibility = View.VISIBLE
         }
     }
-
 
 
     private fun liDateYear(actionSet: (Int) -> Unit) {
@@ -401,15 +396,15 @@ class FragmentStatistics : Fragment() {
         binding.chart.xAxis.position = XAxis.XAxisPosition.BOTTOM //axisX in bottom
     }
 
-    private fun lastDay():List<String>{
+    private fun lastDay(): List<String> {
         val calendar = Calendar.getInstance()
         val dates = mutableListOf<String>()
-        calendar.add(Calendar.DAY_OF_MONTH,0)
-        dates.add(0, calendar.get(Calendar.DAY_OF_MONTH).toString())
+        calendar.add(Calendar.DAY_OF_MONTH , 0)
+        dates.add(0 , calendar.get(Calendar.DAY_OF_MONTH).toString())
 
         for (i in 0 until 29) {
-            calendar.add(Calendar.DAY_OF_MONTH, -1)
-            dates.add(0, calendar.get(Calendar.DAY_OF_MONTH).toString())
+            calendar.add(Calendar.DAY_OF_MONTH , -1)
+            dates.add(0 , calendar.get(Calendar.DAY_OF_MONTH).toString())
         }
 
         return dates

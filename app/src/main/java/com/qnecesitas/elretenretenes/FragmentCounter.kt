@@ -63,7 +63,7 @@ class FragmentCounter : Fragment() {
     //Notification
     private val CHANNEL_ID: String = "ElReten"
     private val CHANNEL_NAME = "ElReten"
-    lateinit var notificationManager : NotificationManager
+    lateinit var notificationManager: NotificationManager
 
     var section = "Mostrador"
 
@@ -81,8 +81,9 @@ class FragmentCounter : Fragment() {
         binding.recycler.adapter = adapterCounter
 
         //Notification
-        val context= requireActivity().applicationContext
-        notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val context = requireActivity().applicationContext
+        notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         binding.btnAcept.setOnClickListener {
             liAddReten()
@@ -144,8 +145,8 @@ class FragmentCounter : Fragment() {
 
         })
         loadRecyclerInfoAll()
-        if (!Constants.Notificado){
-            Constants.Notificado=true
+        if (!Constants.Notificado) {
+            Constants.Notificado = true
             ifNotification()
         }
 
@@ -889,15 +890,15 @@ class FragmentCounter : Fragment() {
     private fun displayNotification1(counter: Int): Notification {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel =
-                NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH)
+                NotificationChannel(CHANNEL_ID , CHANNEL_NAME , NotificationManager.IMPORTANCE_HIGH)
             channel.description = getString(R.string.d_ficit)
             channel.enableLights(true)
             channel.lightColor = Color.RED
             notificationManager.createNotificationChannel(channel)
         }
-        val context= requireActivity().applicationContext
+        val context = requireActivity().applicationContext
         val builder: NotificationCompat.Builder =
-            NotificationCompat.Builder(context, CHANNEL_ID)
+            NotificationCompat.Builder(context , CHANNEL_ID)
                 .setContentTitle(getString(R.string.d_ficit))
                 .setContentText("Mostrador: $counter productos.")
                 .setSmallIcon(R.drawable.ic_launcher_round)
@@ -910,15 +911,15 @@ class FragmentCounter : Fragment() {
     private fun displayNotification2(store: Int): Notification {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel =
-                NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH)
+                NotificationChannel(CHANNEL_ID , CHANNEL_NAME , NotificationManager.IMPORTANCE_HIGH)
             channel.description = getString(R.string.d_ficit)
             channel.enableLights(true)
             channel.lightColor = Color.RED
             notificationManager.createNotificationChannel(channel)
         }
-        val context= requireActivity().applicationContext
+        val context = requireActivity().applicationContext
         val builder: NotificationCompat.Builder =
-            NotificationCompat.Builder(context, CHANNEL_ID)
+            NotificationCompat.Builder(context , CHANNEL_ID)
                 .setContentTitle(getString(R.string.d_ficit))
                 .setContentText("Almacén: $store productos.")
                 .setSmallIcon(R.drawable.ic_launcher_round)
@@ -927,16 +928,17 @@ class FragmentCounter : Fragment() {
         return builder.build()
 
     }
+
     @OptIn(DelicateCoroutinesApi::class)
     fun ifNotification() {
         lifecycleScope.launch {
             val deficitCounter = viewModel.getDeficitCounter()
             val deficitStore = viewModel.getDeficitStore()
             if (deficitCounter >= 1 && deficitStore >= 1) {
-                notificationManager.notify(8, displayNotification1(deficitCounter))
+                notificationManager.notify(8 , displayNotification1(deficitCounter))
                 GlobalScope.launch {
                     delay(5000)
-                    notificationManager.notify(9,displayNotification2(deficitStore))
+                    notificationManager.notify(9 , displayNotification2(deficitStore))
                 }
             } else if (deficitCounter >= 1 && deficitStore < 1) {
                 notificationManager.notify(9 , displayNotification1(deficitCounter))

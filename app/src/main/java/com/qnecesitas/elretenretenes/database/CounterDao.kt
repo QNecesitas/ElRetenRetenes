@@ -81,10 +81,10 @@ interface CounterDao {
     )
 
     @Query("SELECT COUNT(*) FROM Counter WHERE amount <= deficit")
-     suspend fun getDeficitCounter():Int
+    suspend fun getDeficitCounter(): Int
 
     @Query("SELECT COUNT(*) FROM Store WHERE amount <= deficit")
-     suspend fun getDeficitStore():Int
+    suspend fun getDeficitStore(): Int
 
 }
 

@@ -145,5 +145,6 @@
     <string name="ventas_cant">Ventas: %d</string>
     <string name="no_hay_valores">No hay valores para mostrar aún</string>
     <string name="m_s_vendidos_en_la_semana">Más vendidos en la semana:</string>
+    <string name="selecciona_la_fecha">Selecciona la fecha</string>
 
 </resources>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,6 +15,7 @@
         android:fitsSystemWindows="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -31,10 +31,10 @@
 
     <!--Container Scroll-->
     <ScrollView
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AAU_AppBar"
         android:layout_width="match_parent"
-        android:layout_height="0sp">
+        android:layout_height="0sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AAU_AppBar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,29 +44,29 @@
             <!--CV Logo-->
             <androidx.cardview.widget.CardView
                 android:id="@+id/AAU_CV_Logo"
-                android:layout_marginEnd="20sp"
-                android:layout_marginStart="20sp"
-                android:layout_marginTop="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="8sp">
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="20sp"
+
+                android:layout_marginEnd="20sp"
+                app:cardCornerRadius="8sp"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:background="?attr/colorSurface"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="?attr/colorSurface">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/AAU_CV_Logo_picture"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="20sp"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:cardCornerRadius="10sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:cardCornerRadius="10sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        app:layout_constraintTop_toTopOf="parent">
 
 
                         <androidx.appcompat.widget.AppCompatImageView
@@ -85,28 +85,28 @@
 
 
                     <TextView
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
                         android:id="@+id/AAU_nombre_empresa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="5sp"
                         android:text="@string/el_ret_n"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/AAU_CV_Logo_picture"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        app:layout_constraintTop_toBottomOf="@id/AAU_CV_Logo_picture" />
 
                     <TextView
-                        android:textColor="@color/white"
-                        android:layout_marginBottom="20sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="2sp"
+                        android:layout_marginBottom="20sp"
                         android:text="@string/negocio_particular"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/AAU_nombre_empresa"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        app:layout_constraintTop_toBottomOf="@id/AAU_nombre_empresa" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -116,38 +116,38 @@
             <!--CV Info-->
             <androidx.cardview.widget.CardView
                 android:id="@+id/AAU_CV_Info"
-                app:cardCornerRadius="8sp"
-                android:layout_marginEnd="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20sp"
                 android:layout_marginTop="20sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_marginEnd="20sp"
+                app:cardCornerRadius="8sp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <!--Phone number-->
                     <LinearLayout
-                        android:layout_marginTop="10sp"
-                        android:layout_marginStart="10sp"
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="10sp"
+                        android:layout_marginTop="10sp"
+                        android:orientation="horizontal"
                         tools:ignore="UseCompoundDrawables">
 
                         <ImageView
                             android:layout_width="24sp"
                             android:layout_height="24sp"
-                            android:src="@drawable/baseline_local_phone_24"
-                            android:importantForAccessibility="no" />
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/baseline_local_phone_24" />
 
                         <TextView
-                            android:layout_marginStart="5sp"
                             android:layout_width="wrap_content"
                             android:layout_height="24sp"
-                            android:text="@string/_53_58419241"/>
+                            android:layout_marginStart="5sp"
+                            android:text="@string/_53_58419241" />
 
 
                     </LinearLayout>
@@ -155,32 +155,27 @@
 
                     <!--Location-->
                     <LinearLayout
-                        android:layout_marginBottom="10sp"
-                        android:layout_marginTop="8sp"
-                        android:layout_marginStart="10sp"
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="10sp"
+                        android:layout_marginTop="8sp"
+                        android:layout_marginBottom="10sp"
+                        android:orientation="horizontal"
                         tools:ignore="UseCompoundDrawables">
 
                         <ImageView
                             android:layout_width="24sp"
                             android:layout_height="24sp"
-                            android:src="@drawable/baseline_location_on_24"
-                            android:importantForAccessibility="no" />
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/baseline_location_on_24" />
 
                         <TextView
-                            android:layout_marginStart="5sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="5sp"
                             android:text="@string/direccion_negocio" />
 
                     </LinearLayout>
-
-
-
-
-
 
 
                 </LinearLayout>
@@ -190,14 +185,14 @@
 
             <!--About Us-->
             <androidx.cardview.widget.CardView
-                android:layout_marginBottom="20sp"
                 android:id="@+id/AAU_CV_AU"
-                android:layout_marginEnd="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20sp"
                 android:layout_marginTop="20sp"
-                app:cardCornerRadius="8sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_marginEnd="20sp"
+                android:layout_marginBottom="20sp"
+                app:cardCornerRadius="8sp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -205,26 +200,25 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_marginStart="10sp"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/sobre_nosotros1"/>
+                        android:layout_marginStart="10sp"
+                        android:text="@string/sobre_nosotros1"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:layout_marginStart="10sp"
-                        android:layout_marginTop="4sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/sobre_nosotros_desc"
-                        android:layout_marginBottom="10sp"/>
+                        android:layout_marginStart="10sp"
+                        android:layout_marginTop="4sp"
+                        android:layout_marginBottom="10sp"
+                        android:text="@string/sobre_nosotros_desc" />
 
                 </LinearLayout>
 
 
             </androidx.cardview.widget.CardView>
-
 
 
         </LinearLayout>

@@ -69,10 +69,10 @@
                         android:id="@+id/tiet_code"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:enabled="false"
                         android:hint="@string/c_digo"
                         android:inputType="text"
-                        android:maxLength="100"
-                        android:enabled="false"/>
+                        android:maxLength="100" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

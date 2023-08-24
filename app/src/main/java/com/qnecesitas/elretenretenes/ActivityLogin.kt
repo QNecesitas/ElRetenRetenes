@@ -21,46 +21,43 @@ class ActivityLogin : AppCompatActivity() {
     private lateinit var sharedEditor: SharedPreferences.Editor
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
-
-
         //Preferences
-        sharedPreferences = getSharedPreferences("ElRetenRetenes", 0)
+        sharedPreferences = getSharedPreferences("ElRetenRetenes" , 0)
         sharedEditor = sharedPreferences.edit()
 
 
-        password = sharedPreferences.getString("password", Constants.INITIAL_PASSWORD).toString()
+        password = sharedPreferences.getString("password" , Constants.INITIAL_PASSWORD).toString()
 
         binding.ALBTNStartSession.setOnClickListener {
-            if (binding.ALTIETPassword.text.toString().trim().isNotEmpty()){
-                if(binding.ALTIETPassword.text.toString() == password){
+            if (binding.ALTIETPassword.text.toString().trim().isNotEmpty()) {
+                if (binding.ALTIETPassword.text.toString() == password) {
                     binding.ALTILPassword.error = null
 
-                    val intent = Intent(this, ActivityHome::class.java)
+                    val intent = Intent(this , ActivityHome::class.java)
                     startActivity(intent)
 
-                }else{
-                    binding.ALTILPassword.error =(getString(R.string.contrase_a_incorrecta))
+                } else {
+                    binding.ALTILPassword.error = (getString(R.string.contrase_a_incorrecta))
                 }
-            }else{
+            } else {
                 binding.ALTILPassword.error = getString(R.string.este_campo_no_debe_vacio)
             }
         }
 
 
-        binding.tvAboutUs.setOnClickListener{
-            val intent = Intent(this, ActivityAboutUs::class.java)
+        binding.tvAboutUs.setOnClickListener {
+            val intent = Intent(this , ActivityAboutUs::class.java)
             startActivity(intent)
         }
 
-        binding.tvAboutDev.setOnClickListener{
-            val intent = Intent(this, ActivityAboutDev::class.java)
+        binding.tvAboutDev.setOnClickListener {
+            val intent = Intent(this , ActivityAboutDev::class.java)
             startActivity(intent)
         }
     }
