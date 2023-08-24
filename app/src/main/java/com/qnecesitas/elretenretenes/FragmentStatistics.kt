@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -116,23 +115,17 @@ class FragmentStatistics : Fragment() {
             val year = date.get(Calendar.YEAR)
             val day = date.get(Calendar.DAY_OF_MONTH)
             alSalesAll = repository.fetchSalesStatistics(month , monthLast , year)
-            Log.e("XXX" , "${alSalesAll.size}")
             val listMonth = alSalesAll.filter {
                 it.month == month
             }
-            Log.e("YYY" , "${listMonth.size}")
             val cantMonth = 30 - day
-            Log.e("BBB" , "$cantMonth")
             date.set(year , monthLast - 1 , 1)
             val lastDay = date.getActualMaximum(Calendar.DAY_OF_MONTH)
-            Log.e("AAA" , "$lastDay")
             val dayLastDate = lastDay - cantMonth
             val listMonthLast = alSalesAll.filter {
                 it.day > dayLastDate
             }
-            Log.e("ZZZ" , "${listMonthLast.size}")
             val listFilter = listMonth + listMonthLast
-            Log.e("WWW" , "${listFilter.size}")
 
             updateChart(listFilter)
         }
