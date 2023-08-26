@@ -24,7 +24,7 @@ interface CounterDao {
         brand: String
     )
 
-    @Query("SELECT * FROM Counter")
+    @Query("SELECT * FROM Counter ORDER BY size ASC")
     fun fetchReten(): Flow<List<Counter>>
 
     @Query("UPDATE Counter SET code=:code, location=:location, amount=:amount, buyPrice=:buyPrice, salePrice=:salePrice,descr=:descr,deficit =:deficit, size =:size, brand=:brand WHERE code=:code ")

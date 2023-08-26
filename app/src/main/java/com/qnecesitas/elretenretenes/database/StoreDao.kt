@@ -24,7 +24,7 @@ interface StoreDao {
         brand: String
     )
 
-    @Query("SELECT * FROM Store")
+    @Query("SELECT * FROM Store ORDER BY size ASC")
     fun fetchReten(): Flow<List<Store>>
 
     @Query("UPDATE Store SET code=:code, location=:location, amount=:amount, buyPrice=:buyPrice, salePrice=:salePrice,descr=:descr,deficit =:deficit, size =:size, brand=:brand WHERE code=:code ")
