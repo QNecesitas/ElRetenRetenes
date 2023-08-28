@@ -35,8 +35,8 @@
                 <!--IV Picture Car-->
                 <ImageView
                     android:id="@+id/image"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:background="?attr/colorPrimary"
                     android:importantForAccessibility="no"
                     android:src="@drawable/baseline_image_search_24"
@@ -60,7 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="4dp"
                     android:text="@string/medida"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="4dp"
                     android:text="@string/cargando"
                     app:layout_constraintStart_toEndOf="@id/tvSizeS"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -82,7 +82,7 @@
                     android:id="@+id/tvAmountS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="4dp"
                     android:text="@string/cantidad1"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@id/tvSizeS"
@@ -94,10 +94,56 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="4dp"
                     android:text="@string/cargando"
                     app:layout_constraintStart_toEndOf="@id/tvAmountS"
                     app:layout_constraintTop_toBottomOf="@id/tvSize" />
+
+                <!--Tv Location-->
+                <TextView
+                    android:id="@+id/tvLocationS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/localizaci_n1"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/tvSizeS"
+                    app:layout_constraintTop_toBottomOf="@id/tvAmountS" />
+
+                <!--Tv Location-->
+                <TextView
+                    android:id="@+id/tvLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/cargando"
+                    app:layout_constraintStart_toEndOf="@id/tvLocationS"
+                    app:layout_constraintTop_toBottomOf="@id/tvAmount" />
+
+                <!--Tv Sale Price-->
+                <TextView
+                    android:id="@+id/tvSalePriceS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/precio_de_venta1"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/tvSizeS"
+                    app:layout_constraintTop_toBottomOf="@id/tvLocationS" />
+
+                <!--Tv Sale Price-->
+                <TextView
+                    android:id="@+id/tvSalePrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/cargando"
+                    app:layout_constraintStart_toEndOf="@id/tvSalePriceS"
+                    app:layout_constraintTop_toBottomOf="@id/tvLocation" />
+
+
 
 
                 <ImageView

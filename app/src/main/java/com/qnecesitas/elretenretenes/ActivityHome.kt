@@ -1,9 +1,11 @@
 package com.qnecesitas.elretenretenes
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.tabs.TabLayout
@@ -29,6 +31,7 @@ class ActivityHome : AppCompatActivity() {
 
     //Fragments
     private lateinit var fragmentManager: FragmentManager
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,13 +74,20 @@ class ActivityHome : AppCompatActivity() {
             }
 
         })
+
         binding.ivIconSearch.setOnClickListener {
+            val inputMethodManager =
+                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED , 0)
             binding.clSearch.visibility = View.VISIBLE
             binding.ivIconSearch.visibility = View.GONE
             binding.ivIconSetting.visibility = View.GONE
             binding.search.setQuery("" , false)
         }
         binding.ivCloseSearch.setOnClickListener {
+            val inputMethodManager =
+                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY , 0)
             binding.clSearch.visibility = View.GONE
             binding.ivIconSearch.visibility = View.VISIBLE
             binding.ivIconSetting.visibility = View.VISIBLE

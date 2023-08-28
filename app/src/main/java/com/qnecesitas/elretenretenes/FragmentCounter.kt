@@ -21,6 +21,8 @@ import com.qnecesitas.elretenretenes.databinding.FragmentCounterBinding
 import com.qnecesitas.elretenretenes.viewmodels.CounterViewModel
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.qnecesitas.elretenretenes.adapters.CounterAdapter
 import com.qnecesitas.elretenretenes.auxiliary.Constants
 import com.qnecesitas.elretenretenes.auxiliary.IDCreater
@@ -149,6 +151,22 @@ class FragmentCounter : Fragment() {
             Constants.Notificado = true
             ifNotification()
         }
+        //Visibility Button Accept
+        binding.recycler.layoutManager = LinearLayoutManager(requireContext())
+        binding.recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView , dx: Int , dy: Int) {
+                super.onScrolled(recyclerView , dx , dy)
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+                val itemCount = layoutManager.itemCount
+                if (lastVisibleItemPosition == itemCount - 1 && itemCount > 5) {
+                    binding.btnAcept.hide()
+                } else {
+                    binding.btnAcept.show()
+                }
+            }
+        })
+
 
         return binding.root
     }
@@ -225,6 +243,7 @@ class FragmentCounter : Fragment() {
 
     private fun checkInfoDataEdit(): Boolean {
         var amountTrue = 0
+        val regex = Regex("^\\d+\\*\\d+.*$")
 
         //Locate
         if (li_edit_binding?.tietLocalizacion?.text!!.trim().isEmpty()) {
@@ -240,22 +259,22 @@ class FragmentCounter : Fragment() {
 
         //PriceBuy
         if (li_edit_binding?.tietPriceBuy?.text!!.trim().isEmpty()) {
-            li_edit_binding?.tietPriceBuy?.setText(0)
+            li_edit_binding?.tietPriceBuy?.setText("0")
         }
 
         //PriceSale
         if (li_edit_binding?.tietPriceSale?.text!!.trim().isEmpty()) {
-            li_edit_binding?.tietPriceSale?.setText(0)
+            li_edit_binding?.tietPriceSale?.setText("0")
         }
 
         //Amount
         if (li_edit_binding?.tietCant?.text?.trim()!!.isEmpty()) {
-            li_edit_binding?.tietCant?.setText(0)
+            li_edit_binding?.tietCant?.setText("0")
         }
 
         //Deficit
         if (li_edit_binding?.tietDeficit?.text?.trim()!!.isEmpty()) {
-            li_edit_binding?.tietDeficit?.setText(0)
+            li_edit_binding?.tietDeficit?.setText("0")
         }
         //Brand
         if (li_edit_binding?.tietBrand?.text?.trim()!!.isEmpty()) {
@@ -263,15 +282,22 @@ class FragmentCounter : Fragment() {
         }
 
         //Size
-        if (li_edit_binding?.tietSize?.text?.trim()!!.isEmpty()) {
-            li_edit_binding?.tietSize?.setText(getString(R.string.no_definido))
+        if (li_edit_binding?.tietSize?.text?.trim()!!
+                .isEmpty() || !regex.matches(li_edit_binding!!.tietSize.text!!)
+        ) {
+            li_edit_binding?.tietSize?.error =
+                getString(R.string.este_campo_no_cumple_los_requisitos_establecidos)
+        } else {
+            amountTrue++
+            li_edit_binding?.tietSize?.error = null
         }
+        //Descr
         if (li_edit_binding?.tietDesc?.text?.trim()!!.isEmpty()) {
             li_edit_binding?.tietDesc?.setText(getString(R.string.no_definido))
         }
 
 
-        return amountTrue == 1
+        return amountTrue == 2
     }
 
     private fun editProductDB(counter: Counter) {
@@ -368,7 +394,7 @@ class FragmentCounter : Fragment() {
 
     private fun checkInfoDataAdd(): Boolean {
         var amountTrue = 0
-
+        val regex = Regex("^\\d+\\*\\d+.*$")
         //Locate
         if (li_add_binding?.tietLocalizacion?.text!!.trim().isEmpty()) {
             li_add_binding?.tietLocalizacion?.setText(getString(R.string.no_definido))
@@ -383,22 +409,22 @@ class FragmentCounter : Fragment() {
 
         //PriceBuy
         if (li_add_binding?.tietPriceBuy?.text!!.trim().isEmpty()) {
-            li_add_binding?.tietPriceBuy?.setText(0)
+            li_add_binding?.tietPriceBuy?.setText("0")
         }
 
         //PriceSale
         if (li_add_binding?.tietPriceSale?.text!!.trim().isEmpty()) {
-            li_add_binding?.tietPriceSale?.setText(0)
+            li_add_binding?.tietPriceSale?.setText("0")
         }
 
         //Amount
         if (li_add_binding?.tietCant?.text?.trim()!!.isEmpty()) {
-            li_add_binding?.tietCant?.setText(0)
+            li_add_binding?.tietCant?.setText("0")
         }
 
         //Deficit
         if (li_add_binding?.tietDeficit?.text?.trim()!!.isEmpty()) {
-            li_add_binding?.tietDeficit?.setText(0)
+            li_add_binding?.tietDeficit?.setText("0")
         }
         //Brand
         if (li_add_binding?.tietBrand?.text?.trim()!!.isEmpty()) {
@@ -406,15 +432,21 @@ class FragmentCounter : Fragment() {
         }
 
         //Size
-        if (li_add_binding?.tietSize?.text?.trim()!!.isEmpty()) {
-            li_add_binding?.tietSize?.setText(getString(R.string.no_definido))
+        if (li_add_binding?.tietSize?.text?.trim()!!
+                .isEmpty() || !regex.matches(li_add_binding!!.tietSize.text!!)
+        ) {
+            li_add_binding?.tietSize?.error =
+                getString(R.string.este_campo_no_cumple_los_requisitos_establecidos)
+        } else {
+            amountTrue++
+            li_add_binding?.tietSize?.error = null
         }
         if (li_add_binding?.tietDesc?.text?.trim()!!.isEmpty()) {
             li_add_binding?.tietDesc?.setText(getString(R.string.no_definido))
         }
 
 
-        return amountTrue == 1
+        return amountTrue == 2
     }
 
     private fun addProductDB(counter: Counter) {
@@ -463,6 +495,7 @@ class FragmentCounter : Fragment() {
     fun loadRecyclerInfoAll() {
         GlobalScope.launch(Dispatchers.IO) {
             viewModel.getAllReten()
+
         }
     }
 

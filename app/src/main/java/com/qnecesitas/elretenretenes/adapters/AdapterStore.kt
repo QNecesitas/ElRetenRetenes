@@ -45,11 +45,15 @@ class AdapterStore(private val context: Context) :
             //Declare
             val amount = store.amount
             val size = store.size
+            val location = store.location
+            val salePrice= store.salePrice
 
 
 
             binding.tvSize.text = size
             binding.tvAmount.text = amount.toString()
+            binding.tvLocation.text = location
+            binding.tvSalePrice.text=salePrice.toString()
             binding.menuOption.setOnClickListener {
                 val popupMenu = PopupMenu(context , binding.menuOption)
                 popupMenu.menuInflater.inflate(R.menu.menu_option_reten , popupMenu.menu)
