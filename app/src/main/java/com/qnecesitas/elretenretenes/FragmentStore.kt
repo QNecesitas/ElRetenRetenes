@@ -19,6 +19,7 @@ import com.qnecesitas.elretenretenes.adapters.AdapterStore
 import com.qnecesitas.elretenretenes.auxiliary.IDCreater
 import com.qnecesitas.elretenretenes.data.Store
 import com.qnecesitas.elretenretenes.databinding.FragmentStoreBinding
+import com.qnecesitas.elretenretenes.databinding.LiAddEntryBinding
 import com.qnecesitas.elretenretenes.databinding.LiAddRetenBinding
 import com.qnecesitas.elretenretenes.databinding.LiEditAmountBinding
 import com.qnecesitas.elretenretenes.databinding.LiEditRetenBinding
@@ -44,6 +45,7 @@ class FragmentStore : Fragment() {
     private var li_amount_binding: LiEditAmountBinding? = null
     private var li_transfer_binding: LiTransferAmountBinding? = null
     private var li_sales_binding: LiSalesSealsBinding? = null
+    private var li_entry_binding: LiAddEntryBinding? = null
 
     //Recycler
     private lateinit var alStore: MutableList<Store>
@@ -595,39 +597,39 @@ class FragmentStore : Fragment() {
 
     fun entryAmount(store: Store) {
         val inflater = LayoutInflater.from(binding.root.context)
-        li_amount_binding = LiEditAmountBinding.inflate(inflater)
+        li_entry_binding = LiAddEntryBinding.inflate(inflater)
         val builder = AlertDialog.Builder(binding.root.context)
-        builder.setView(li_amount_binding!!.root)
+        builder.setView(li_entry_binding!!.root)
         val alertDialog = builder.create()
 
         //Filling and listeners
         loadRecyclerInfoAll()
         var currentAmount = 0
-        li_amount_binding!!.et.setText(currentAmount.toString())
+        li_entry_binding!!.et.setText(currentAmount.toString())
 
-        li_amount_binding!!.ivBtnMore.setOnClickListener {
+        li_entry_binding!!.ivBtnMore.setOnClickListener {
             if (currentAmount != 99999) {
                 currentAmount++
-                li_amount_binding!!.et.setText(currentAmount.toString())
+                li_entry_binding!!.et.setText(currentAmount.toString())
             }
         }
 
-        li_amount_binding!!.ivBtnLess.setOnClickListener {
+        li_entry_binding!!.ivBtnLess.setOnClickListener {
             if (currentAmount != 0) {
                 currentAmount--
-                li_amount_binding!!.et.setText(currentAmount.toString())
+                li_entry_binding!!.et.setText(currentAmount.toString())
             }
         }
 
-        li_amount_binding!!.et.addTextChangedListener(object : TextWatcher {
+        li_entry_binding!!.et.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(charSequence: CharSequence , i: Int , i1: Int , i2: Int) {
-                if (li_amount_binding!!.et.text.toString() == "0") {
+                if (li_entry_binding!!.et.text.toString() == "0") {
                     currentAmount = 1
-                    li_amount_binding!!.et.setText(currentAmount.toString())
-                } else if (li_amount_binding!!.et.text.toString() == "") {
+                    li_entry_binding!!.et.setText(currentAmount.toString())
+                } else if (li_entry_binding!!.et.text.toString() == "") {
                     currentAmount = 1
                 } else {
-                    currentAmount = li_amount_binding!!.et.text.toString().toInt()
+                    currentAmount = li_entry_binding!!.et.text.toString().toInt()
                 }
             }
 
@@ -641,13 +643,13 @@ class FragmentStore : Fragment() {
             }
         })
 
-        li_amount_binding!!.btnAccept.setOnClickListener {
+        li_entry_binding!!.btnAccept.setOnClickListener {
             alertDialog.dismiss()
-            if (li_amount_binding!!.et.text.toString().isNotBlank()) {
+            if (li_entry_binding!!.et.text.toString().isNotBlank()) {
                 lifecycleScope.launch {
                     viewModel.updateAmount(
                         store.code ,
-                        li_amount_binding!!.et.text.toString().toInt() + store.amount
+                        li_entry_binding!!.et.text.toString().toInt() + store.amount
                     )
                     FancyToast.makeText(
                         requireContext() ,
@@ -659,11 +661,11 @@ class FragmentStore : Fragment() {
                 }
 
             } else {
-                li_amount_binding!!.et.error = getString(R.string.este_campo_no_debe_vacio)
+                li_entry_binding!!.et.error = getString(R.string.este_campo_no_debe_vacio)
             }
         }
 
-        li_amount_binding!!.btnCancel.setOnClickListener {
+        li_entry_binding!!.btnCancel.setOnClickListener {
             alertDialog.dismiss()
         }
 

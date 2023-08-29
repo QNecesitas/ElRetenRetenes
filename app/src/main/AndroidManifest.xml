@@ -16,6 +16,21 @@
         android:theme="@style/Theme.ElRetenRetenes"
         tools:targetApi="31">
         <activity
+            android:name=".FragmentDeficitCounter"
+            android:exported="false" />
+        <activity
+            android:name=".FragmentDeficitStore"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityDeficit"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityStatistics"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityMenu"
+            android:exported="false" />
+        <activity
             android:name=".FragmentStatistics"
             android:exported="false" />
         <activity

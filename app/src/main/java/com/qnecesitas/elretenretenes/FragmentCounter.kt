@@ -1,12 +1,7 @@
 package com.qnecesitas.elretenretenes
 
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import com.qnecesitas.elretenretenes.databinding.FragmentCounterBinding
 import com.qnecesitas.elretenretenes.viewmodels.CounterViewModel
@@ -24,9 +18,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.qnecesitas.elretenretenes.adapters.CounterAdapter
-import com.qnecesitas.elretenretenes.auxiliary.Constants
 import com.qnecesitas.elretenretenes.auxiliary.IDCreater
 import com.qnecesitas.elretenretenes.data.Counter
+import com.qnecesitas.elretenretenes.databinding.LiAddEntryBinding
 import com.qnecesitas.elretenretenes.databinding.LiAddRetenBinding
 import com.qnecesitas.elretenretenes.databinding.LiEditAmountBinding
 import com.qnecesitas.elretenretenes.databinding.LiEditRetenBinding
@@ -37,7 +31,6 @@ import com.shashank.sony.fancytoastlib.FancyToast
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
@@ -52,6 +45,7 @@ class FragmentCounter : Fragment() {
     private var li_amount_binding: LiEditAmountBinding? = null
     private var li_transfer_binding: LiTransferAmountBinding? = null
     private var li_sales_binding: LiSalesSealsBinding? = null
+    private var li_entry_binding: LiAddEntryBinding? = null
 
     //Recycler
     private lateinit var alCounter: MutableList<Counter>
@@ -61,11 +55,6 @@ class FragmentCounter : Fragment() {
     private val viewModel: CounterViewModel by viewModels {
         CounterViewModelFactory((activity?.application as ElRetenRetenes).database.counterDao())
     }
-
-    //Notification
-    private val CHANNEL_ID: String = "ElReten"
-    private val CHANNEL_NAME = "ElReten"
-    lateinit var notificationManager: NotificationManager
 
     var section = "Mostrador"
 
@@ -81,11 +70,6 @@ class FragmentCounter : Fragment() {
         alCounter = mutableListOf()
         adapterCounter = CounterAdapter(requireContext())
         binding.recycler.adapter = adapterCounter
-
-        //Notification
-        val context = requireActivity().applicationContext
-        notificationManager =
-            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         binding.btnAcept.setOnClickListener {
             liAddReten()
@@ -147,10 +131,7 @@ class FragmentCounter : Fragment() {
 
         })
         loadRecyclerInfoAll()
-        if (!Constants.Notificado) {
-            Constants.Notificado = true
-            ifNotification()
-        }
+
         //Visibility Button Accept
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
         binding.recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -613,39 +594,39 @@ class FragmentCounter : Fragment() {
 
     fun entryAmount(counter: Counter) {
         val inflater = LayoutInflater.from(binding.root.context)
-        li_amount_binding = LiEditAmountBinding.inflate(inflater)
+        li_entry_binding = LiAddEntryBinding.inflate(inflater)
         val builder = AlertDialog.Builder(binding.root.context)
-        builder.setView(li_amount_binding!!.root)
+        builder.setView(li_entry_binding!!.root)
         val alertDialog = builder.create()
 
         //Filling and listeners
         loadRecyclerInfoAll()
         var currentAmount = 0
-        li_amount_binding!!.et.setText(currentAmount.toString())
+        li_entry_binding!!.et.setText(currentAmount.toString())
 
-        li_amount_binding!!.ivBtnMore.setOnClickListener {
+        li_entry_binding!!.ivBtnMore.setOnClickListener {
             if (currentAmount != 99999) {
                 currentAmount++
-                li_amount_binding!!.et.setText(currentAmount.toString())
+                li_entry_binding!!.et.setText(currentAmount.toString())
             }
         }
 
-        li_amount_binding!!.ivBtnLess.setOnClickListener {
+        li_entry_binding!!.ivBtnLess.setOnClickListener {
             if (currentAmount != 0) {
                 currentAmount--
-                li_amount_binding!!.et.setText(currentAmount.toString())
+                li_entry_binding!!.et.setText(currentAmount.toString())
             }
         }
 
-        li_amount_binding!!.et.addTextChangedListener(object : TextWatcher {
+        li_entry_binding!!.et.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(charSequence: CharSequence , i: Int , i1: Int , i2: Int) {
-                if (li_amount_binding!!.et.text.toString() == "0") {
+                if (li_entry_binding!!.et.text.toString() == "0") {
                     currentAmount = 1
-                    li_amount_binding!!.et.setText(currentAmount.toString())
-                } else if (li_amount_binding!!.et.text.toString() == "") {
+                    li_entry_binding!!.et.setText(currentAmount.toString())
+                } else if (li_entry_binding!!.et.text.toString() == "") {
                     currentAmount = 1
                 } else {
-                    currentAmount = li_amount_binding!!.et.text.toString().toInt()
+                    currentAmount = li_entry_binding!!.et.text.toString().toInt()
                 }
             }
 
@@ -659,13 +640,13 @@ class FragmentCounter : Fragment() {
             }
         })
 
-        li_amount_binding!!.btnAccept.setOnClickListener {
+        li_entry_binding!!.btnAccept.setOnClickListener {
             alertDialog.dismiss()
-            if (li_amount_binding!!.et.text.toString().isNotBlank()) {
+            if (li_entry_binding!!.et.text.toString().isNotBlank()) {
                 lifecycleScope.launch {
                     viewModel.updateAmount(
                         counter.code ,
-                        li_amount_binding!!.et.text.toString().toInt() + counter.amount
+                        li_entry_binding!!.et.text.toString().toInt() + counter.amount
                     )
                     FancyToast.makeText(
                         requireContext() ,
@@ -677,11 +658,11 @@ class FragmentCounter : Fragment() {
                 }
 
             } else {
-                li_amount_binding!!.et.error = getString(R.string.este_campo_no_debe_vacio)
+                li_entry_binding!!.et.error = getString(R.string.este_campo_no_debe_vacio)
             }
         }
 
-        li_amount_binding!!.btnCancel.setOnClickListener {
+        li_entry_binding!!.btnCancel.setOnClickListener {
             alertDialog.dismiss()
         }
 
@@ -918,68 +899,4 @@ class FragmentCounter : Fragment() {
         alertDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         alertDialog.show()
     }
-
-
-    private fun displayNotification1(counter: Int): Notification {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel =
-                NotificationChannel(CHANNEL_ID , CHANNEL_NAME , NotificationManager.IMPORTANCE_HIGH)
-            channel.description = getString(R.string.d_ficit)
-            channel.enableLights(true)
-            channel.lightColor = Color.RED
-            notificationManager.createNotificationChannel(channel)
-        }
-        val context = requireActivity().applicationContext
-        val builder: NotificationCompat.Builder =
-            NotificationCompat.Builder(context , CHANNEL_ID)
-                .setContentTitle(getString(R.string.d_ficit))
-                .setContentText("Mostrador: $counter productos.")
-                .setSmallIcon(R.drawable.ic_launcher_round)
-                .setAutoCancel(false)
-
-        return builder.build()
-
-    }
-
-    private fun displayNotification2(store: Int): Notification {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel =
-                NotificationChannel(CHANNEL_ID , CHANNEL_NAME , NotificationManager.IMPORTANCE_HIGH)
-            channel.description = getString(R.string.d_ficit)
-            channel.enableLights(true)
-            channel.lightColor = Color.RED
-            notificationManager.createNotificationChannel(channel)
-        }
-        val context = requireActivity().applicationContext
-        val builder: NotificationCompat.Builder =
-            NotificationCompat.Builder(context , CHANNEL_ID)
-                .setContentTitle(getString(R.string.d_ficit))
-                .setContentText("Almacén: $store productos.")
-                .setSmallIcon(R.drawable.ic_launcher_round)
-                .setAutoCancel(false)
-
-        return builder.build()
-
-    }
-
-    @OptIn(DelicateCoroutinesApi::class)
-    fun ifNotification() {
-        lifecycleScope.launch {
-            val deficitCounter = viewModel.getDeficitCounter()
-            val deficitStore = viewModel.getDeficitStore()
-            if (deficitCounter >= 1 && deficitStore >= 1) {
-                notificationManager.notify(8 , displayNotification1(deficitCounter))
-                GlobalScope.launch {
-                    delay(5000)
-                    notificationManager.notify(9 , displayNotification2(deficitStore))
-                }
-            } else if (deficitCounter >= 1 && deficitStore < 1) {
-                notificationManager.notify(9 , displayNotification1(deficitCounter))
-            } else if (deficitStore >= 1 && deficitCounter < 1) {
-                notificationManager.notify(9 , displayNotification2(deficitStore))
-            }
-        }
-    }
-
-
 }

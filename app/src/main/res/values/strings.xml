@@ -149,5 +149,10 @@
     <string name="localizaci_n1">Localización:</string>
     <string name="precio_de_venta1">Precio de venta:</string>
     <string name="este_campo_no_cumple_los_requisitos_establecidos">Este campo no cumple los requisitos establecidos</string>
+    <string name="men">Menú</string>
+    <string name="retenes1">Retenes</string>
+    <string name="estad_sticas">Estadísticas</string>
+    <string name="d_ficit1">Déficit</string>
+    <string name="entrada1">ENTRADA</string>
 
 </resources>

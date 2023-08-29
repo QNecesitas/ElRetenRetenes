@@ -39,7 +39,7 @@ class ActivityLogin : AppCompatActivity() {
                 if (binding.ALTIETPassword.text.toString() == password) {
                     binding.ALTILPassword.error = null
 
-                    val intent = Intent(this , ActivityHome::class.java)
+                    val intent = Intent(this , ActivityMenu::class.java)
                     startActivity(intent)
 
                 } else {

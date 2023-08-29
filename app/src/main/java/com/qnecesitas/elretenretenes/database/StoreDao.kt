@@ -80,5 +80,11 @@ interface StoreDao {
         year: Int
     )
 
+    @Query("SELECT * FROM Store WHERE amount <= deficit ORDER BY CAST (SUBSTR(size,1,INSTR(size,'*')-1) AS INTEGER)")
+    fun getDeficitStore(): Flow<List<Store>>
+
+    @Query("SELECT COUNT(*) FROM Store WHERE amount <= deficit")
+    suspend fun getDeficitStores(): Int
+
 
 }

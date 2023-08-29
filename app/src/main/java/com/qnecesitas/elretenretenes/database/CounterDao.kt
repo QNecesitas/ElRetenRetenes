@@ -83,8 +83,8 @@ interface CounterDao {
     @Query("SELECT COUNT(*) FROM Counter WHERE amount <= deficit")
     suspend fun getDeficitCounter(): Int
 
-    @Query("SELECT COUNT(*) FROM Store WHERE amount <= deficit")
-    suspend fun getDeficitStore(): Int
+    @Query("SELECT * FROM Counter WHERE amount <= deficit ORDER BY CAST (SUBSTR(size,1,INSTR(size,'*')-1) AS INTEGER)")
+    fun getDeficitCounters(): Flow<List<Counter>>
 
 }
 
