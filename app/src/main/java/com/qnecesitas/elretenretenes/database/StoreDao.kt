@@ -11,7 +11,7 @@ interface StoreDao {
     @Query("SELECT * FROM Store WHERE code = :code")
     suspend fun selectDuplicate(code: String): List<Store>
 
-    @Query("INSERT INTO Store VALUES (:code,:location,:amount,:buyPrice,:salePrice,:descr,:deficit,:size,:brand)")
+    @Query("INSERT INTO Store VALUES (:code,:brand,:amount,:buyPrice,:salePrice,:descr,:deficit,:size,:location)")
     suspend fun insertReten(
         code: String ,
         location: String ,
@@ -55,7 +55,7 @@ interface StoreDao {
     @Query("SELECT amount FROM Counter WHERE code=:code")
     suspend fun fetchAmountCounter(code: String): Int
 
-    @Query("INSERT INTO Counter VALUES (:code,:location,:amount,:buyPrice,:salePrice,:descr,:deficit,:size,:brand)")
+    @Query("INSERT INTO Counter VALUES (:code,:brand,:amount,:buyPrice,:salePrice,:descr,:deficit,:size,:location)")
     suspend fun insertCounter(
         code: String ,
         location: String ,

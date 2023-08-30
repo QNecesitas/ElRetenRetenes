@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ElRetenRetenes</string>
+    <string name="app_name">El Retén Retenes</string>
     <string name="retenes">Retenes</string>
     <string name="buscar_ret_n">Buscar retén</string>
     <string name="title_activity_fragment_counter">FragmentCounter</string>

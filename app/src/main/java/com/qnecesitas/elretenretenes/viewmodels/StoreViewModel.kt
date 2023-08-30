@@ -145,7 +145,7 @@ class StoreViewModel(private val storeDao: StoreDao) : ViewModel() {
         brand: String
     ) {
         storeDao.insertCounter(
-            code ,
+            code,
             location ,
             amount ,
             buyPrice ,

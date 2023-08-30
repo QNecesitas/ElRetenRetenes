@@ -57,7 +57,7 @@ class FragmentCounter : Fragment() {
 
     //View Model
     private val viewModel: CounterViewModel by viewModels {
-        CounterViewModelFactory((activity?.application as ElRetenRetenes).database.counterDao())
+        CounterViewModelFactory((requireActivity().application as ElRetenRetenes).database.counterDao())
     }
 
     //Notification
@@ -240,22 +240,22 @@ class FragmentCounter : Fragment() {
 
         //PriceBuy
         if (li_edit_binding?.tietPriceBuy?.text!!.trim().isEmpty()) {
-            li_edit_binding?.tietPriceBuy?.setText(0)
+            li_edit_binding?.tietPriceBuy?.setText("0")
         }
 
         //PriceSale
         if (li_edit_binding?.tietPriceSale?.text!!.trim().isEmpty()) {
-            li_edit_binding?.tietPriceSale?.setText(0)
+            li_edit_binding?.tietPriceSale?.setText("0")
         }
 
         //Amount
         if (li_edit_binding?.tietCant?.text?.trim()!!.isEmpty()) {
-            li_edit_binding?.tietCant?.setText(0)
+            li_edit_binding?.tietCant?.setText("0")
         }
 
         //Deficit
         if (li_edit_binding?.tietDeficit?.text?.trim()!!.isEmpty()) {
-            li_edit_binding?.tietDeficit?.setText(0)
+            li_edit_binding?.tietDeficit?.setText("0")
         }
         //Brand
         if (li_edit_binding?.tietBrand?.text?.trim()!!.isEmpty()) {
@@ -278,13 +278,13 @@ class FragmentCounter : Fragment() {
         lifecycleScope.launch {
             viewModel.updateReten(
                 counter.code ,
-                counter.location ,
+                counter.location,
                 counter.amount ,
                 counter.buyPrice ,
                 counter.salePrice ,
                 counter.descr ,
                 counter.deficit ,
-                counter.size ,
+                counter.size,
                 counter.brand
             )
         }
@@ -383,22 +383,22 @@ class FragmentCounter : Fragment() {
 
         //PriceBuy
         if (li_add_binding?.tietPriceBuy?.text!!.trim().isEmpty()) {
-            li_add_binding?.tietPriceBuy?.setText(0)
+            li_add_binding?.tietPriceBuy?.setText("0")
         }
 
         //PriceSale
         if (li_add_binding?.tietPriceSale?.text!!.trim().isEmpty()) {
-            li_add_binding?.tietPriceSale?.setText(0)
+            li_add_binding?.tietPriceSale?.setText("0")
         }
 
         //Amount
         if (li_add_binding?.tietCant?.text?.trim()!!.isEmpty()) {
-            li_add_binding?.tietCant?.setText(0)
+            li_add_binding?.tietCant?.setText("0")
         }
 
         //Deficit
         if (li_add_binding?.tietDeficit?.text?.trim()!!.isEmpty()) {
-            li_add_binding?.tietDeficit?.setText(0)
+            li_add_binding?.tietDeficit?.setText("0")
         }
         //Brand
         if (li_add_binding?.tietBrand?.text?.trim()!!.isEmpty()) {
@@ -421,7 +421,7 @@ class FragmentCounter : Fragment() {
         lifecycleScope.launch {
             viewModel.addReten(
                 counter.code ,
-                counter.location ,
+                counter.location,
                 counter.amount ,
                 counter.buyPrice ,
                 counter.salePrice ,

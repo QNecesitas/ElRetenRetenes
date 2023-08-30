@@ -10,9 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:translationZ="8dp"
+        android:translationZ="4dp"
         app:cardCornerRadius="12dp"
-        app:cardElevation="8dp">
+        app:cardElevation="4dp">
 
         <!--Cl Container-->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,8 +39,8 @@
                     android:layout_height="40dp"
                     android:background="?attr/colorPrimary"
                     android:importantForAccessibility="no"
-                    android:src="@drawable/baseline_image_search_24"
-                    app:tint="?attr/colorOnPrimary" />
+                    android:src="@drawable/seal"
+                    android:padding="5dp"/>
 
 
             </androidx.cardview.widget.CardView>

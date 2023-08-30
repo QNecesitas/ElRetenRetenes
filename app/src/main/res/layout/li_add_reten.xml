@@ -47,8 +47,8 @@
                         android:layout_margin="4dp"
                         android:background="?attr/colorPrimary"
                         android:importantForAccessibility="no"
-                        android:src="@drawable/baseline_image_search_24"
-                        app:tint="?attr/colorOnPrimary" />
+                        android:src="@drawable/seal"
+                        android:padding="5dp"/>
 
 
                 </androidx.cardview.widget.CardView>
