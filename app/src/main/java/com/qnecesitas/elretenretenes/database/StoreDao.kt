@@ -24,7 +24,7 @@ interface StoreDao {
         brand: String
     )
 
-    @Query("SELECT * FROM Store")
+    @Query("SELECT * FROM Store ORDER BY CAST (SUBSTR(size,1,INSTR(size,'*')-1) AS INTEGER)")
     fun fetchReten(): Flow<List<Store>>
 
     @Query("UPDATE Store SET code=:code, location=:location, amount=:amount, buyPrice=:buyPrice, salePrice=:salePrice,descr=:descr,deficit =:deficit, size =:size, brand=:brand WHERE code=:code ")
@@ -79,6 +79,12 @@ interface StoreDao {
         month: Int ,
         year: Int
     )
+
+    @Query("SELECT * FROM Store WHERE amount <= deficit ORDER BY CAST (SUBSTR(size,1,INSTR(size,'*')-1) AS INTEGER)")
+    fun getDeficitStore(): Flow<List<Store>>
+
+    @Query("SELECT COUNT(*) FROM Store WHERE amount <= deficit")
+    suspend fun getDeficitStores(): Int
 
 
 }

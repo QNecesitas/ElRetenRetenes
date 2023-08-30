@@ -16,8 +16,28 @@
         android:theme="@style/Theme.ElRetenRetenes"
         tools:targetApi="31">
         <activity
-            android:name=".FragmentStatistics"
+            android:name=".FragmentDeficitCounter"
+            android:exported="false"
+            android:configChanges="screenSize|orientation"/>
+        <activity
+            android:name=".FragmentDeficitStore"
+            android:exported="false"
+            android:configChanges="screenSize|orientation"/>
+        <activity
+            android:name=".ActivityDeficit"
+            android:exported="false"
+            android:configChanges="screenSize|orientation"/>
+        <activity
+            android:name=".ActivityStatistics"
+            android:exported="false"
+            android:configChanges="screenSize|orientation"/>
+        <activity
+            android:name=".ActivityMenu"
             android:exported="false" />
+        <activity
+            android:name=".FragmentStatistics"
+            android:exported="false"
+            android:configChanges="screenSize|orientation"/>
         <activity
             android:name=".ActivityAboutDev"
             android:exported="false" />
@@ -29,15 +49,18 @@
             android:exported="false" />
         <activity
             android:name=".FragmentStore"
-            android:exported="false" />
+            android:exported="false"
+            android:configChanges="screenSize|orientation"/>
         <activity
             android:name=".FragmentCounter"
             android:exported="false"
             android:label="@string/title_activity_fragment_counter"
-            android:theme="@style/Theme.ElRetenRetenes" />
+            android:theme="@style/Theme.ElRetenRetenes"
+            android:configChanges="screenSize|orientation"/>
         <activity
             android:name=".ActivityHome"
-            android:exported="false" />
+            android:exported="false"
+            android:configChanges="screenSize|orientation"/>
         <activity
             android:name=".ActivityLogin"
             android:exported="false" />

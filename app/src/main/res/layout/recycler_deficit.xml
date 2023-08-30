@@ -10,9 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:translationZ="4dp"
+        android:translationZ="8dp"
         app:cardCornerRadius="12dp"
-        app:cardElevation="4dp">
+        app:cardElevation="8dp">
 
         <!--Cl Container-->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,12 +35,12 @@
                 <!--IV Picture Car-->
                 <ImageView
                     android:id="@+id/image"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:background="?attr/colorPrimary"
                     android:importantForAccessibility="no"
-                    android:src="@drawable/seal"
-                    android:padding="5dp"/>
+                    android:src="@drawable/baseline_image_search_24"
+                    app:tint="?attr/colorOnPrimary" />
 
 
             </androidx.cardview.widget.CardView>
@@ -86,7 +86,7 @@
                     android:text="@string/cantidad1"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@id/tvSizeS"
-                    app:layout_constraintTop_toBottomOf="@id/tvSizeS" />
+                    app:layout_constraintTop_toBottomOf="@id/tvLocationS" />
 
                 <!--Tv Phone-->
                 <TextView
@@ -96,8 +96,10 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="4dp"
                     android:text="@string/cargando"
+                    android:textColor="?attr/colorPrimary"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/tvAmountS"
-                    app:layout_constraintTop_toBottomOf="@id/tvSize" />
+                    app:layout_constraintTop_toBottomOf="@id/tvLocation" />
 
                 <!--Tv Location-->
                 <TextView
@@ -108,7 +110,7 @@
                     android:text="@string/localizaci_n1"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@id/tvSizeS"
-                    app:layout_constraintTop_toBottomOf="@id/tvAmountS" />
+                    app:layout_constraintTop_toBottomOf="@id/tvSizeS" />
 
                 <!--Tv Location-->
                 <TextView
@@ -119,47 +121,20 @@
                     android:layout_marginTop="4dp"
                     android:text="@string/cargando"
                     app:layout_constraintStart_toEndOf="@id/tvLocationS"
-                    app:layout_constraintTop_toBottomOf="@id/tvAmount" />
+                    app:layout_constraintTop_toBottomOf="@id/tvSize" />
 
-                <!--Tv Sale Price-->
                 <TextView
-                    android:id="@+id/tvSalePriceS"
+                    android:id="@+id/tvEntry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/precio_de_venta1"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/tvSizeS"
-                    app:layout_constraintTop_toBottomOf="@id/tvLocationS" />
-
-                <!--Tv Sale Price-->
-                <TextView
-                    android:id="@+id/tvSalePrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/cargando"
-                    app:layout_constraintStart_toEndOf="@id/tvSalePriceS"
-                    app:layout_constraintTop_toBottomOf="@id/tvLocation" />
-
-
-
-
-                <ImageView
-                    android:id="@+id/menu_option"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_marginBottom="8dp"
-                    android:contentDescription="@string/men_de_opciones"
-                    android:src="@drawable/baseline_more_vert_24"
+                    android:text="@string/entrada1"
+                    android:textColor="?attr/colorPrimary"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="?attr/colorPrimary">
-
-                </ImageView>
+                    app:layout_constraintTop_toBottomOf="@id/tvAmountS"></TextView>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

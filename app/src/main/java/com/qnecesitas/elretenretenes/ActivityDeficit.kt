@@ -9,21 +9,20 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.tabs.TabLayout
-import com.qnecesitas.elretenretenes.databinding.ActivityHomeBinding
+import com.qnecesitas.elretenretenes.databinding.ActivityDeficitBinding
 
-
-class ActivityHome : AppCompatActivity() {
+class ActivityDeficit : AppCompatActivity() {
 
     //Binding
-    private lateinit var binding: ActivityHomeBinding
+    private lateinit var binding: ActivityDeficitBinding
 
 
     //TabLayout
     private lateinit var tabLayout: TabLayout
 
 
-    private lateinit var fragmentCounter: FragmentCounter
-    private lateinit var fragmentStore: FragmentStore
+    private lateinit var fragmentCounter: FragmentDeficitCounter
+    private lateinit var fragmentStore: FragmentDeficitStore
 
     private var tabSelect = 0
 
@@ -31,10 +30,9 @@ class ActivityHome : AppCompatActivity() {
     //Fragments
     private lateinit var fragmentManager: FragmentManager
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
+        binding = ActivityDeficitBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
@@ -47,8 +45,8 @@ class ActivityHome : AppCompatActivity() {
 
         //Fragments
         fragmentManager = supportFragmentManager
-        fragmentCounter = FragmentCounter()
-        fragmentStore = FragmentStore()
+        fragmentCounter = FragmentDeficitCounter()
+        fragmentStore = FragmentDeficitStore()
 
         //Settings
         binding.ivIconSetting.setOnClickListener {

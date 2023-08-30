@@ -24,7 +24,7 @@ interface CounterDao {
         brand: String
     )
 
-    @Query("SELECT * FROM Counter")
+    @Query("SELECT * FROM Counter ORDER BY CAST (SUBSTR(size,1,INSTR(size,'*')-1) AS INTEGER)")
     fun fetchReten(): Flow<List<Counter>>
 
     @Query("UPDATE Counter SET code=:code, location=:location, amount=:amount, buyPrice=:buyPrice, salePrice=:salePrice,descr=:descr,deficit =:deficit, size =:size, brand=:brand WHERE code=:code ")
@@ -83,8 +83,8 @@ interface CounterDao {
     @Query("SELECT COUNT(*) FROM Counter WHERE amount <= deficit")
     suspend fun getDeficitCounter(): Int
 
-    @Query("SELECT COUNT(*) FROM Store WHERE amount <= deficit")
-    suspend fun getDeficitStore(): Int
+    @Query("SELECT * FROM Counter WHERE amount <= deficit ORDER BY CAST (SUBSTR(size,1,INSTR(size,'*')-1) AS INTEGER)")
+    fun getDeficitCounters(): Flow<List<Counter>>
 
 }
 
