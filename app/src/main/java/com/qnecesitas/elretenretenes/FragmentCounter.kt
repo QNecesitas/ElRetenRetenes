@@ -140,7 +140,7 @@ class FragmentCounter : Fragment() {
                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
                 val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
                 val itemCount = layoutManager.itemCount
-                if (lastVisibleItemPosition == itemCount - 1 && itemCount > 5) {
+                if (lastVisibleItemPosition == itemCount - 1 && itemCount > 6) {
                     binding.btnAcept.hide()
                 } else {
                     binding.btnAcept.show()
