@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +35,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
-class FragmentCounter : Fragment() {
+class FragmentCounter(private val lastSearch: String) : Fragment() {
 
     //Binding
     private lateinit var binding: FragmentCounterBinding
@@ -148,6 +149,11 @@ class FragmentCounter : Fragment() {
             }
         })
 
+        viewModel.listCounter.observe(requireActivity()){
+            if(lastSearch != "null") {
+                callFilterByText(lastSearch)
+            }
+        }
 
         return binding.root
     }

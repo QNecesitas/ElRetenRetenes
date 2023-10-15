@@ -8,6 +8,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.createViewModelLazy
 import com.google.android.material.tabs.TabLayout
 import com.qnecesitas.elretenretenes.databinding.ActivityHomeBinding
 
@@ -26,6 +27,7 @@ class ActivityHome : AppCompatActivity() {
     private lateinit var fragmentStore: FragmentStore
 
     private var tabSelect = 0
+    private var lastSearch: String? = null
 
 
     //Fragments
@@ -47,8 +49,6 @@ class ActivityHome : AppCompatActivity() {
 
         //Fragments
         fragmentManager = supportFragmentManager
-        fragmentCounter = FragmentCounter()
-        fragmentStore = FragmentStore()
 
         //Settings
         binding.ivIconSetting.setOnClickListener {
@@ -63,6 +63,7 @@ class ActivityHome : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                lastSearch = newText
                 if (tabSelect == 0) {
                     fragmentCounter.callFilterByText(newText.toString())
                 } else if (tabSelect == 1) {
@@ -74,6 +75,7 @@ class ActivityHome : AppCompatActivity() {
         })
 
         binding.ivIconSearch.setOnClickListener {
+            binding.clSearch.requestFocus()
             val inputMethodManager =
                 getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED , 0)
@@ -97,25 +99,19 @@ class ActivityHome : AppCompatActivity() {
         tabLayout = binding.tabLayout
         tabLayout.addTab(tabLayout.newTab().setText("Mostrador"))
         tabLayout.addTab(tabLayout.newTab().setText("Almacén"))
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener  {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 when (tab.position) {
                     0 -> {
                         // Código para ejecutar cuando se selecciona la pestaña Mostrador
                         showFragmentCounter()
                         tabSelect = 0
-                        binding.clSearch.visibility = View.GONE
-                        binding.ivIconSearch.visibility = View.VISIBLE
-                        binding.ivIconSetting.visibility = View.VISIBLE
                     }
 
                     1 -> {
                         // Código para ejecutar cuando se selecciona la pestaña Almacén
                         showFragmentStore()
                         tabSelect = 1
-                        binding.clSearch.visibility = View.GONE
-                        binding.ivIconSearch.visibility = View.VISIBLE
-                        binding.ivIconSetting.visibility = View.VISIBLE
                     }
                 }
             }
@@ -134,12 +130,14 @@ class ActivityHome : AppCompatActivity() {
     }
 
     fun showFragmentCounter() {
+        fragmentCounter = FragmentCounter(lastSearch.toString())
         fragmentManager.beginTransaction()
             .replace(R.id.frame , fragmentCounter)
             .commit()
     }
 
     fun showFragmentStore() {
+        fragmentStore = FragmentStore(lastSearch.toString())
         fragmentManager.beginTransaction()
             .replace(R.id.frame , fragmentStore)
             .commit()

@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +35,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
-class FragmentStore : Fragment() {
+class FragmentStore(private val lastSearch: String) : Fragment() {
 
     //Binding
     private lateinit var binding: FragmentStoreBinding
@@ -56,6 +57,7 @@ class FragmentStore : Fragment() {
         StoreViewModelFactory((requireActivity().application as ElRetenRetenes).database.storeDao())
     }
     var section = "Almacén"
+
 
     override fun onCreateView(
         inflater: LayoutInflater ,
@@ -150,6 +152,12 @@ class FragmentStore : Fragment() {
                 }
             }
         })
+
+        viewModel.listStore.observe(requireActivity()){
+            if(lastSearch != "null") {
+                callFilterByText(lastSearch)
+            }
+        }
 
         return binding.root
     }
