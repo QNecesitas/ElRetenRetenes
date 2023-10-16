@@ -230,7 +230,8 @@ class FragmentCounter(private val lastSearch: String) : Fragment() {
 
     private fun checkInfoDataEdit(): Boolean {
         var amountTrue = 0
-        val regex = Regex("^\\d+\\*\\d+.*$")
+        //val regex = Regex("^\\d+\\*\\d+.*$")
+        val regex = Regex("^[+-]?\\d+(\\.\\d+)?\\*\\d+.*$")
 
         //Locate
         if (li_edit_binding?.tietLocalizacion?.text!!.trim().isEmpty()) {
@@ -381,7 +382,9 @@ class FragmentCounter(private val lastSearch: String) : Fragment() {
 
     private fun checkInfoDataAdd(): Boolean {
         var amountTrue = 0
-        val regex = Regex("^\\d+\\*\\d+.*$")
+        //val regex = Regex("^\\d+\\*\\d+.*$")
+        val regex = Regex("^[+-]?\\d+(\\.\\d+)?\\*\\d+.*$")
+
         //Locate
         if (li_add_binding?.tietLocalizacion?.text!!.trim().isEmpty()) {
             li_add_binding?.tietLocalizacion?.setText(getString(R.string.no_definido))

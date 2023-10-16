@@ -234,7 +234,8 @@ class FragmentStore(private val lastSearch: String) : Fragment() {
 
     private fun checkInfoDataEdit(): Boolean {
         var amountTrue = 0
-        val regex = Regex("^\\d+\\*\\d+.*$")
+        //val regex = Regex("^\\d+\\*\\d+.*$")
+        val regex = Regex("^[+-]?\\d+(\\.\\d+)?\\*\\d+.*$")
 
         //Locate
         if (li_edit_binding?.tietLocalizacion?.text!!.trim().isEmpty()) {
@@ -385,7 +386,8 @@ class FragmentStore(private val lastSearch: String) : Fragment() {
 
     private fun checkInfoDataAdd(): Boolean {
         var amountTrue = 0
-        val regex = Regex("^\\d+\\*\\d+.*$")
+        //val regex = Regex("^\\d+\\*\\d+.*$")
+        val regex = Regex("^[+-]?\\d+(\\.\\d+)?\\*\\d+.*$")
 
         //Locate
         if (li_add_binding?.tietLocalizacion?.text!!.trim().isEmpty()) {
